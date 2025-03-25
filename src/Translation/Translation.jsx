@@ -8,7 +8,7 @@ export default function Translation({ moduleDictDispatch, id, left = '', right =
 	const [modalOpenState, setModalOpenState] = useState(false) // в идеале избавиться от useState, создав функцию, которая вызывает модалку 
 
 	return (
-		<div className='translation-block'>
+		<div className='translation-block content-wrapper'>
 			<div className="pair">
 				<h4 className='pair-word'>{left}</h4>
 				<h3>:</h3>

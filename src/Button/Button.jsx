@@ -1,9 +1,13 @@
-import classes from './Button.module.scss'
+import './Button.scss'
 
-export default function Button({ children, className = '', isActive = false, ...props }) {
+export default function Button({ children, className = '', isActive = false, isTransparent = false, ...props }) {
+	let btnClasses = className + ' '
+	btnClasses += isTransparent ? 'btn-transparent' : 'btn'
+	if (isActive) btnClasses += ' active'
+
 	return (
 		<button
-			className={`${className} ${isActive ? `${classes.button} ${classes.active}` : classes.button}`}
+			className={btnClasses}
 			{...props}
 		>
 			{children}
