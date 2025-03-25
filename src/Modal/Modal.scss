@@ -1,0 +1,13 @@
+dialog {
+	width: calc(var(--content-max-width) - 50px);
+	margin: 12rem auto;
+	padding: 1rem;
+	border: 3px solid var(--background-color);
+	border-radius: 10px;
+	background-color: var(--primary-color);
+	box-shadow: 5px 5px 14px rgba($color: #000000, $alpha: .3);
+}
+
+dialog::backdrop {
+	background: rgba(0, 0, 0, 0.5);
+}
