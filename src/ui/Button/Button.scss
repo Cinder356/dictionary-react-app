@@ -1,0 +1,74 @@
+.btn {
+	padding: 0.45rem 1.3rem;
+	border: none;
+	cursor: pointer;
+	border-radius: .8rem;
+	font-weight: bold;
+	transition: opacity 0.3s ease;
+	font-size: 1rem;
+	white-space: nowrap; // Запрещает перенос строк
+	overflow: hidden; // Скрывает выходящий за границы контент
+	text-overflow: ellipsis;
+	color: var(--accent-color);
+
+	&.active-c {
+		background-color: var(--secondary-color);
+	}
+
+	&.inactive-c {
+		background-color: gray;
+	}
+
+	&.red-c {
+		background-color: var(--red-color);
+	}
+
+	&.green-c {
+		background-color: var(--green-color);
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+}
+
+.btn-transparent {
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 1.5rem;
+	border: none;
+	background: none;
+
+	&.active-c {
+		color: var(--secondary-color);
+	}
+
+	&.inactive-c {
+		color: var(--accent-color);
+	}
+
+	&.red-c {
+		color: var(--red-color);
+	}
+
+	&.green-c {
+		color: var(--green-color);
+	}
+
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+}
+
+
+@media (hover: hover) {
+	.btn:hover {
+		opacity: 0.8;
+	}
+
+	.btn-transparent {
+		opacity: 0.8;
+	}
+}

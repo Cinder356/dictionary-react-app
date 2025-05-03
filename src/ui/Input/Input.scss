@@ -1,0 +1,19 @@
+.input {
+	border: 2px solid var(--background-color);
+	background-color: var(--primary-color);
+	outline: none;
+	font-size: 1rem;
+
+	border-radius: 5px;
+	padding: 0.5rem 1rem;
+	margin-bottom: 1rem;
+	transition: border-color 0.2s linear;
+
+	&:focus {
+		border-color: var(--secondary-color);
+	}
+
+	&.error {
+		border-color: var(--red-color);
+	}
+}

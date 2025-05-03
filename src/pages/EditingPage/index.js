@@ -1,0 +1,1 @@
+export { EditingPage } from './components/EditingPage/EditingPage'
