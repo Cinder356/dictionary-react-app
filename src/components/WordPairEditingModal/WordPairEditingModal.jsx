@@ -9,7 +9,7 @@ const pairWordsClasses = 'input-pair-element'
 const pairWrongWordsClasses = pairWordsClasses + ' error'
 
 export default function WordPairEditingModal({ modalOpenState, setModalOpenState, onSubmit, closeOnSubmit = false, leftDefault = '', rightDefault = '' }) {
-	if (!modalOpenState) return
+	// if (!modalOpenState) return
 
 	const [pairWrongness, setPairWrogness] = useState({
 		left: false,

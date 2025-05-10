@@ -8,6 +8,7 @@ export default function Button({ children, className = '', color = btnColors.ACT
 		<button
 			disabled={disabled}
 			className={additionalClasses + ' ' + className}
+			type='button'
 			{...props}
 		>
 			{children}

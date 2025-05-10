@@ -1,5 +1,16 @@
-.delete-modal {
+.delete-modal-caption {
+	text-align: center;
+	margin: 0 .4rem 1rem .4rem;
+}
+
+.delete-modal-button-container {
 	display: flex;
 	justify-content: space-between;
-	width: 200px;
+	// flex-wrap: wrap;
+
+	@media (max-width: 290px) {
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: .2rem;
+	}
 }
