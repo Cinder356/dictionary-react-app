@@ -1,10 +1,12 @@
 .btn {
+	background-color: transparent;
 	user-select: none;
 	padding: 0.45rem 1.3rem;
 	border: none;
 	cursor: pointer;
 	border-radius: .8rem;
 	font-weight: bold;
+	// border: 2px solid;
 	transition: opacity 0.3s ease;
 	font-size: 1rem;
 	white-space: nowrap; // Запрещает перенос строк

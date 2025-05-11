@@ -1,3 +1,5 @@
+@use '/src/app/styles/variables';
+
 .navigation-buttons-container {
 	display: grid;
 	grid-template-columns: 1fr 4fr;
@@ -12,6 +14,23 @@
 		grid-column: 2;
 		grid-row: 1;
 	}
+
+	@media (max-width: variables.$mobile-size-limit) {
+		grid-template-columns: 1fr 2fr;
+	}
+
+	@media (max-width: 400px) {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	@media (max-width: 330px) {
+		grid-template-columns: 1fr 0;
+
+		.add-button {
+			grid-column: 1;
+			grid-row: 2;
+		}
+	}
 }
 
 .input-pair-container {
@@ -23,5 +42,7 @@
 	.input-pair-element {
 		width: 47%;
 		margin-bottom: 0;
+		padding-left: .4rem;
+		padding-right: .4rem;
 	}
 }

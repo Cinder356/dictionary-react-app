@@ -10,7 +10,7 @@ export default function CreatePage() {
 	const [modalOpenState, setModalOpenState] = useState(false)
 	const [dataSavingState, setDataSavingState] = useState(true)
 	const [isNew, setIsNew] = useState(true)
-	const { id: strID } = useParams();
+	const { id: strID } = useParams()
 	const id = Number(strID)
 
 	useEffect(() => {

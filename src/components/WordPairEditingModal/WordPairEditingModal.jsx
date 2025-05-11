@@ -36,10 +36,10 @@ export default function WordPairEditingModal({ modalOpenState, setModalOpenState
 		<Modal isOpen={modalOpenState}>
 			<label htmlFor="input-word-pair"><b>New translation</b></label>
 			<div className="input-pair-container" id="input-word-pair" >
-				<Input id="left-word-input" className={'input-pair-element'} isWrong={pairWrongness.left} type="text"
+				<Input id="left-word-input" className='input-pair-element' isWrong={pairWrongness.left} type="text"
 					onChange={(e) => handlePair(e, 'left')} value={pair.left} />
 				<b>:</b>
-				<Input id="right-word-input" className={'input-pair-element'} isWrong={pairWrongness.right} type="text"
+				<Input id="right-word-input" className='input-pair-element' isWrong={pairWrongness.right} type="text"
 					onChange={(e) => handlePair(e, 'right')} value={pair.right} />
 			</div>
 			<div className="navigation-buttons-container">

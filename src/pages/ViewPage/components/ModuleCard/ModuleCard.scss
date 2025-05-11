@@ -1,9 +1,25 @@
-.module-item-content {
+@use '/src/app/styles/variables';
+
+.module-content {
 	display: flex;
 	justify-content: space-between;
+
+	@media (max-width: variables.$mobile-size-limit) {
+		display: block;
+	}
 }
 
 .module-card-button-container {
 	display: flex;
 	gap: 1rem;
+
+	@media (max-width: variables.$mobile-size-limit) {
+		margin-top: .4rem;
+		justify-content: right;
+	}
+}
+
+.module-card-caption {
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

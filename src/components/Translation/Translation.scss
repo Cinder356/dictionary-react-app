@@ -1,6 +1,5 @@
 .translation-block {
 	height: max-content;
-	padding: .8rem 2rem;
 
 	.pair {
 		display: flex;
@@ -14,6 +13,8 @@
 			background-color: var(--background-color);
 			padding: .4rem 0;
 			border-radius: .8rem;
+			overflow: hidden;
+			text-overflow: clip;
 		}
 	}
 

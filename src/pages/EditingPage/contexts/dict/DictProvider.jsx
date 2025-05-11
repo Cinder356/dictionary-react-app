@@ -26,7 +26,7 @@ export default function ({ children, setDataSavingState }) {
 
 	const editPair = useCallback((id = -1, pair = {}) => {
 		if (id < 0 && !pair) return
-		moduleDictDispatchMiddleware({ type: moduleDictActions.EDIT, id, ...pair })
+		moduleDictDispatchMiddleware({ type: moduleDictActions.EDIT, ...pair, id })
 		setDataSavingState(false)
 	}, [moduleDictDispatchMiddleware])
 

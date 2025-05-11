@@ -5,7 +5,7 @@ import WordPairEditingModal from '../WordPairEditingModal/WordPairEditingModal'
 import { useState } from 'react'
 
 export default function Translation({ id, left = '', right = '', onRemove, onEdit, }) {
-	const [modalOpenState, setModalOpenState] = useState(false) // в идеале избавиться от useState, создав функцию, которая вызывает модалку 
+	const [modalOpenState, setModalOpenState] = useState(false)
 
 	return (
 		<div className='translation-block content-wrapper'>
@@ -21,13 +21,16 @@ export default function Translation({ id, left = '', right = '', onRemove, onEdi
 				>Delete</Button>
 				<Button onClick={() => setModalOpenState(true)}>Edit</Button>
 			</div>
-			<WordPairEditingModal
-				{...{ modalOpenState, setModalOpenState }}
-				onSubmit={pair => onEdit(id, pair)}
-				closeOnSubmit={true}
-				leftDefault={left}
-				rightDefault={right}
-			/>
+			{modalOpenState && ( // из-за того, что тут стоит проверка, реакт пересоздаёт модалку при удачной проверке, блягодаря чем left и right обновляются. иначе пришлось бы использовать стейты для left и right вместе с useEffect
+				<WordPairEditingModal
+					modalOpenState={modalOpenState}
+					setModalOpenState={setModalOpenState}
+					onSubmit={pair => onEdit(id, pair)}
+					closeOnSubmit={true}
+					leftDefault={left}
+					rightDefault={right}
+				/>
+			)}
 		</div>
 	)
 }
