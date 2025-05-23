@@ -7,7 +7,7 @@ const ANIMATION_CLASSES = Object.freeze({
 	gettingNextCard: 'animation-next-card'
 })
 
-export default function ({ term, translation, onSwipe }) { // !!! I must embed useCallbacks
+export default function ({ term, translation, onLeftSwipe, onRightSwipe }) {
 	const [isFlipped, setIsFlipped] = useState(false)
 	const [currentAnimationClass, setCurrentAnimationClass] = useState('')
 	const [cardOffset, setCardOffset] = useState(0);
@@ -15,35 +15,31 @@ export default function ({ term, translation, onSwipe }) { // !!! I must embed u
 	const isAnimating = useRef(false)
 	const touchStartXRef = useRef(0)
 
-	const handleClick = () => {
-		setIsFlipped(prev => !prev)
-	}
+	const handleClick = useCallback(() => setIsFlipped(prev => !prev))
 
-	const handleTouchStart = (e) => {
+	const handleTouchStart = useCallback((e) => {
 		if (isAnimating.current || isTouching.current) return
 
 		touchStartXRef.current = e.clientX
 		isTouching.current = true
-	}
+	}, [isAnimating, isTouching])
 
-	const handleTouchMove = (e) => {
+	const handleTouchMove = useCallback((e) => {
 		if (isAnimating.current || !isTouching.current) return
 
 		const currentX = e.clientX
 		const diff = currentX - touchStartXRef.current
 		setCardOffset(diff)
-	}
+	}, [isAnimating, isTouching, touchStartXRef])
 
-	const handleTouchEnd = (e) => {
+	const handleTouchEnd = useCallback((e) => {
 		if (isAnimating.current && !isTouching.current) return
 
 		if (cardOffset < -100) {
-			console.log('left')
 			setCurrentAnimationClass(ANIMATION_CLASSES.swipingLeft)
 			isAnimating.current = true
 		}
 		else if (cardOffset > 100) {
-			console.log('right')
 			setCurrentAnimationClass(ANIMATION_CLASSES.swipingRight)
 			isAnimating.current = true
 		}
@@ -52,26 +48,32 @@ export default function ({ term, translation, onSwipe }) { // !!! I must embed u
 		else
 			setCardOffset(0)
 		isTouching.current = false
-		console.log(e)
-	}
+	}, [isAnimating, isTouching, cardOffset, handleClick])
 
-	const handlePointerOut = (e) => {
+	const handlePointerOut = useCallback((e) => {
 		if (isTouching.current)
 			handleTouchEnd(e)
-	}
+	}, [isTouching, handleTouchEnd])
 
-	const handleAnimationEnd = (e) => {
-		if (currentAnimationClass === ANIMATION_CLASSES.swipingLeft || currentAnimationClass === ANIMATION_CLASSES.swipingRight) {
+	const handleAnimationEnd = useCallback((e) => {
+		const isLeftSwipingAnimation = currentAnimationClass === ANIMATION_CLASSES.swipingLeft
+		const isRightSwipingAnimation = currentAnimationClass === ANIMATION_CLASSES.swipingRight
+		if (isLeftSwipingAnimation || isRightSwipingAnimation) {
 			setCardOffset(0)
+			setIsFlipped(false)
 			setCurrentAnimationClass(ANIMATION_CLASSES.gettingNextCard)
 			isAnimating.current = true
-			onSwipe()
+
+			if (isLeftSwipingAnimation)
+				onLeftSwipe()
+			else
+				onRightSwipe()
 		}
 		else if (currentAnimationClass === ANIMATION_CLASSES.gettingNextCard) {
 			setCurrentAnimationClass('')
 			isAnimating.current = false
 		}
-	}
+	}, [isAnimating, currentAnimationClass, onLeftSwipe, onRightSwipe])
 
 	return (
 		<>
@@ -90,12 +92,10 @@ export default function ({ term, translation, onSwipe }) { // !!! I must embed u
 			>
 				<div
 					className={'flashcard-front' + (!isFlipped ? ' ' + currentAnimationClass : '')}
-					onAnimationEnd={handleAnimationEnd}
-				>{term} <br /> {Math.round(cardOffset)}</div>
+				>{term}</div>
 
 				<div
 					className={'flashcard-back' + (isFlipped ? ' ' + currentAnimationClass : '')}
-					onAnimationEnd={handleAnimationEnd}
 				>{translation}</div>
 			</div >
 		</>

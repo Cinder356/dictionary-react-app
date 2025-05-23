@@ -1,4 +1,5 @@
 @use '/src/app/styles/variables';
+@use '../../styles/card-settings' as *;
 
 :root {
 	--sliding-direction: -1;
@@ -19,23 +20,23 @@
 
 @keyframes getting-next-card {
 	0% {
-		transform: translateZ(-200px);
+		transform: $second-card-template-transform;
 	}
 
 	100% {
-		transform: translateZ(0);
+		transform: none;
 	}
 }
 
 .flashcard {
+	@include card-size;
 	position: relative;
-	width: 300px;
-	height: 270px;
 	cursor: pointer;
 	user-select: none;
-	perspective: 1000px;
 	font-weight: bold;
 	font-size: 1.5rem;
+	transform-style: preserve-3d;
+	// perspective: 1000px;
 
 	.animation-swiping-left {
 		// pointer-events: none;
@@ -50,7 +51,7 @@
 	}
 
 	.animation-next-card {
-		animation: getting-next-card .4s ease forwards;
+		animation: getting-next-card .2s ease forwards;
 	}
 
 	.flashcard-front,

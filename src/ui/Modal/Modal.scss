@@ -1,13 +1,15 @@
 @use '/src/app/styles/variables';
 
 dialog {
-	width: calc(variables.$max-content-width - 100px);
+	max-width: calc(variables.$max-content-width - 100px);
+	width: 95%;
 	margin: 12rem auto;
 	padding: 1rem;
 	border: 3px solid var(--background-color);
 	border-radius: 10px;
 	background-color: var(--primary-color);
 	box-shadow: 5px 5px 14px rgba($color: #000000, $alpha: .3);
+	outline: none;
 }
 
 dialog::backdrop {
