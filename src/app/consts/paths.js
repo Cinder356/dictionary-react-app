@@ -1,7 +1,8 @@
 
 
 export default Object.freeze({
-	view: '/view',
-	editing: (id) => `/editing/${id}`,
-	learn: (id) => `/learn/${id}`
+	getView: () => '/view',
+	getEditing: (id) => `/editing/${id}`,
+	getLearn: (id) => `/learn/${id}`,
+	getCards: (id) => `/learn/${id}/cards`
 })

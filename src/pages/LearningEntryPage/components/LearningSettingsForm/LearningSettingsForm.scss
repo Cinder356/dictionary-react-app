@@ -1,0 +1,16 @@
+#start-button-container {
+	display: flex;
+	justify-content: flex-end;
+
+	@media (max-width: 300px) {
+		justify-content: center;
+	}
+
+	#start-button {
+		width: 8rem;
+	}
+}
+
+.form-top-margin {
+	margin-top: 1rem;
+}

@@ -9,6 +9,7 @@ $button-line-container-margin: 0.7rem;
 	--secondary-color: #6aa9b1;
 	--accent-color: #EEEEEE;
 
+	--icons-color: #e24d70;
 	--red-color: #7a1d21;
 	--green-color: #5ba781;
 
@@ -58,6 +59,11 @@ $button-line-container-margin: 0.7rem;
 	@media (max-width: variables.$mobile-size-limit) {
 		padding: .7rem 4vw;
 	}
+}
+
+.text-icon {
+	width: 1rem;
+	height: 1rem;
 }
 
 .button-line-wrapper {

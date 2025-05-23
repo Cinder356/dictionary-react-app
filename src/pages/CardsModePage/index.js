@@ -1,0 +1,1 @@
+export { CardModePage } from './components/CardModePage/CardModePage'

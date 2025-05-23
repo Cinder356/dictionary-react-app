@@ -23,8 +23,8 @@ export default function NavBar() {
 	return (
 		<>
 			<nav className='line-nav'>
-				<Button onClick={() => navigate(paths.view)} color={getNavBtnColor(paths.view)}>View</Button>
-				<Button onClick={() => navigate(paths.learn(-1))} color={getNavBtnColor(paths.learn(-1))}>Learn</Button>
+				<Button onClick={() => navigate(paths.getLearn(-1))} color={getNavBtnColor(paths.getLearn(-1))}>Learn</Button>
+				<Button onClick={() => navigate(paths.getView())} color={getNavBtnColor(paths.getView())}>View</Button>
 			</nav>
 
 			<div className="burger-tap-zone" onClick={() => setBurgerOpenState(!burgerOpenState)}>
@@ -34,8 +34,8 @@ export default function NavBar() {
 			{burgerOpenState &&
 				<div className={`burger-menu ${burgerOpenState ? 'active' : ''}`}>
 					<ul>
-						<li><Button onClick={() => handleBurgerNavigate(paths.view)} color={getNavBtnColor(paths.view)} isTransparent={true}>View</Button></li>
-						<li><Button onClick={() => handleBurgerNavigate(paths.learn(-1))} color={getNavBtnColor(paths.learn(-1))} isTransparent={true}>Learn</Button></li>
+						<li><Button onClick={() => handleBurgerNavigate(paths.getLearn(-1))} color={getNavBtnColor(paths.getLearn(-1))} isTransparent={true}>Learn</Button></li>
+						<li><Button onClick={() => handleBurgerNavigate(paths.getView())} color={getNavBtnColor(paths.getView())} isTransparent={true}>View</Button></li>
 					</ul >
 
 				</div >

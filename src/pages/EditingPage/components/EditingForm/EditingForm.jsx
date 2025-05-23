@@ -28,7 +28,7 @@ export default function ({ id, isNew, dataSavingState, setDataSavingState, setMo
 		(async () => {
 			if (isNew) {
 				const receivedID = await addModule(moduleMetaData, dict)
-				navigate(paths.editing(receivedID))
+				navigate(paths.getEditing(receivedID))
 				return
 			}
 			return editModule(id, moduleMetaData, dict)
@@ -44,7 +44,7 @@ export default function ({ id, isNew, dataSavingState, setDataSavingState, setMo
 	const handleDeleteButton = useCallback(() => {
 		if (isNew) return
 		deleteModule(id)
-		navigate(paths.view)
+		navigate(paths.getView())
 	}, [id, isNew, navigate])
 
 	return (

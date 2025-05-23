@@ -21,10 +21,10 @@ export default function () {
 	return (
 		<div className="card-list">
 			<div className="content-wrapper">
-				<Button className='fully-stretched' isTransparent={true} onClick={() => navigate(paths.editing(-1))} >New module</Button>
+				<Button className='fully-stretched' isTransparent={true} onClick={() => navigate(paths.getEditing(-1))} >New module</Button>
 			</div>
 			{modulesMeta.map(moduleMeta =>
-				<ModuleCard key={moduleMeta.id} title={moduleMeta.title} onEdit={() => navigate(paths.editing(moduleMeta.id))} />
+				<ModuleCard key={moduleMeta.id} title={moduleMeta.title} onEdit={() => navigate(paths.getEditing(moduleMeta.id))} onLearn={() => navigate(paths.getLearn(moduleMeta.id))} />
 			)}
 		</div>
 	)

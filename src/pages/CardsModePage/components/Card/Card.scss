@@ -1,0 +1,91 @@
+@use '/src/app/styles/variables';
+
+:root {
+	--sliding-direction: -1;
+}
+
+@keyframes slide-and-fade {
+	0% {
+		transform: translateX(0px);
+		opacity: 1;
+	}
+
+	100% {
+		transform: translateX(calc(100px * var(--sliding-direction)));
+		opacity: 0;
+	}
+
+}
+
+@keyframes getting-next-card {
+	0% {
+		transform: translateZ(-200px);
+	}
+
+	100% {
+		transform: translateZ(0);
+	}
+}
+
+.flashcard {
+	position: relative;
+	width: 300px;
+	height: 270px;
+	cursor: pointer;
+	user-select: none;
+	perspective: 1000px;
+	font-weight: bold;
+	font-size: 1.5rem;
+
+	.animation-swiping-left {
+		// pointer-events: none;
+		animation: slide-and-fade .3s ease forwards;
+		--sliding-direction: -1;
+	}
+
+	.animation-swiping-right {
+		// pointer-events: none;
+		animation: slide-and-fade .3s ease forwards;
+		--sliding-direction: 1;
+	}
+
+	.animation-next-card {
+		animation: getting-next-card .4s ease forwards;
+	}
+
+	.flashcard-front,
+	.flashcard-back {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		backface-visibility: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		// hyphens: auto;
+		word-break: break-all;
+		background-color: var(--primary-color);
+		border-radius: 1rem;
+		box-shadow: 2px 2px 10px rgba($color: #000000, $alpha: .2);
+		box-sizing: border-box;
+		transition: transform ease .7s;
+	}
+
+	.flashcard-front {
+		transform: rotateY(0deg);
+	}
+
+	.flashcard-back {
+		transform: rotateY(180deg);
+		border: 1px solid var(--green-color);
+	}
+
+	&.flipped .flashcard-front {
+		transform: rotateY(-180deg);
+	}
+
+	&.flipped .flashcard-back {
+		transform: rotateY(0deg);
+	}
+}
