@@ -31,7 +31,6 @@
 }
 
 .flashcard {
-	@include card-size;
 	position: relative;
 	cursor: pointer;
 	user-select: none;
@@ -39,6 +38,7 @@
 	font-size: 1.5rem;
 	will-change: transform;
 	transform-style: preserve-3d;
+	@include card-size;
 
 	.animation-swiping-left {
 		animation: slide-and-fade .3s ease forwards;

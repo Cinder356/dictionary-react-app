@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
+import PageTitle from '../PageTitle/PageTitle'
 import './Select.scss'
 
 const DEFAULT_TEXT = 'Choose anything'
@@ -26,6 +27,7 @@ export default function ({ elementsArr, onChange, defaultKey = null, ...props })
 				{currentSelection.text}
 			</div>
 			{isDropped && <div className='select-list'>
+				{elementsArr.length === 0 && <PageTitle>Empty</PageTitle>}
 				{elementsArr.map((elemParams) => <div className='select-list-element' key={elemParams.key} onClick={() => handleSelection(elemParams.key, elemParams.value, elemParams.text)}>{elemParams.text}</div>)}
 			</div>}
 			<span className='select-icon' />
