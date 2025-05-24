@@ -36,11 +36,11 @@ export default function ({ term, translation, onLeftSwipe, onRightSwipe }) {
 	const handleTouchEnd = useCallback((e) => {
 		if (isAnimating.current && !isTouching.current) return
 
-		if (cardOffset < -100) {
+		if (cardOffset < -60) {
 			setCurrentAnimationClass(ANIMATION_CLASSES.swipingLeft)
 			isAnimating.current = true
 		}
-		else if (cardOffset > 100) {
+		else if (cardOffset > 60) {
 			setCurrentAnimationClass(ANIMATION_CLASSES.swipingRight)
 			isAnimating.current = true
 		}
