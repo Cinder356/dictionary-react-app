@@ -9,7 +9,7 @@ export default function () {
 	return (
 		<>
 			<div className='content-wrapper'>
-				<PageTitle>Cards: {id}</PageTitle>
+				<PageTitle>Flashcards</PageTitle>
 			</div>
 			<CardsDeck id={id} />
 		</>

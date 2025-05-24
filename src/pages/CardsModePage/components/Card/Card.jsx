@@ -26,6 +26,7 @@ export default function ({ term, translation, onLeftSwipe, onRightSwipe }) {
 
 	const handleTouchMove = useCallback((e) => {
 		if (isAnimating.current || !isTouching.current) return
+		e.preventDefault();
 
 		const currentX = e.clientX
 		const diff = currentX - touchStartXRef.current
@@ -81,7 +82,7 @@ export default function ({ term, translation, onLeftSwipe, onRightSwipe }) {
 				style={{
 					transition: isAnimating.current || isTouching.current ? 'none' : 'transform .2s',
 					transform: `translateX(${cardOffset}px) rotate(${cardOffset * .04}deg)`,
-					touchAction: 'pan-y'
+					touchAction: 'none'
 				}}
 				className={"flashcard" + (isFlipped ? ' ' + 'flipped' : '')}
 				onPointerDown={handleTouchStart}

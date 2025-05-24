@@ -51,8 +51,19 @@ export default function ({ id }) {
 			/>
 
 			<div className='swipe-hints-container'>
-				{/* <img src={arrowIcon} className='left-arrow' /> */}
-				{/* <img src={arrowIcon} className='right-arrow' /> */}
+				<svg className='left-arrow' width="48" height="48" viewBox="0 0 48 48" fill="none">
+					<path d="M36 24C28 20 20 20 12 24" strokeWidth="3"
+						strokeLinecap="round" strokeLinejoin="round" />
+					<path d="M18 18L12 24L18 30" strokeWidth="3"
+						strokeLinecap="round" strokeLinejoin="round" />
+				</svg>
+
+				<svg className='right-arrow' width="48" height="48" viewBox="0 0 48 48" fill="none">
+					<path d="M12 24C20 20 28 20 36 24" strokeWidth="3"
+						strokeLinecap="round" strokeLinejoin="round" />
+					<path d="M30 18L36 24L30 30" strokeWidth="3"
+						strokeLinecap="round" strokeLinejoin="round" />
+				</svg>
 			</div>
 		</div>
 	)
