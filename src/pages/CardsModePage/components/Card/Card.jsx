@@ -35,6 +35,7 @@ export default function ({ term, translation, onLeftSwipe, onRightSwipe }) {
 
 	const handleTouchEnd = useCallback((e) => {
 		if (isAnimating.current && !isTouching.current) return
+		console.log(e)
 
 		if (cardOffset < -60) {
 			setCurrentAnimationClass(ANIMATION_CLASSES.swipingLeft)
@@ -56,12 +57,16 @@ export default function ({ term, translation, onLeftSwipe, onRightSwipe }) {
 			handleTouchEnd(e)
 	}, [isTouching, handleTouchEnd])
 
+	const handleAnimationStart = useCallback((e) => {
+		if (currentAnimationClass === ANIMATION_CLASSES.swipingLeft || currentAnimationClass === ANIMATION_CLASSES.swipingRight)
+			setIsFlipped(false)
+	}, [currentAnimationClass])
+
 	const handleAnimationEnd = useCallback((e) => {
 		const isLeftSwipingAnimation = currentAnimationClass === ANIMATION_CLASSES.swipingLeft
 		const isRightSwipingAnimation = currentAnimationClass === ANIMATION_CLASSES.swipingRight
 		if (isLeftSwipingAnimation || isRightSwipingAnimation) {
 			setCardOffset(0)
-			setIsFlipped(false)
 			setCurrentAnimationClass(ANIMATION_CLASSES.gettingNextCard)
 			isAnimating.current = true
 
@@ -80,7 +85,7 @@ export default function ({ term, translation, onLeftSwipe, onRightSwipe }) {
 		<>
 			<div
 				style={{
-					transition: isAnimating.current || isTouching.current ? 'none' : 'transform .2s',
+					transition: isAnimating.current || isTouching.current ? 'none' : 'transform .3s',
 					transform: `translateX(${cardOffset}px) rotate(${cardOffset * .04}deg)`,
 					touchAction: 'none'
 				}}
@@ -89,6 +94,7 @@ export default function ({ term, translation, onLeftSwipe, onRightSwipe }) {
 				onPointerMove={handleTouchMove}
 				onPointerUp={handleTouchEnd}
 				onPointerOut={handlePointerOut}
+				onAnimationStart={handleAnimationStart}
 				onAnimationEnd={handleAnimationEnd}
 			>
 				<div

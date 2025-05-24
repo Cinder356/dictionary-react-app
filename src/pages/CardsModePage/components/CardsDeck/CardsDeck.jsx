@@ -44,7 +44,7 @@ export default function ({ id }) {
 			{currentPairIndex + 1 < dictionary.length && <div className='card-template second-card'>{dictionary[currentPairIndex + 1].left}</div>}
 			{currentPairIndex + 2 < dictionary.length && <div className='card-template third-card' />}
 			<ProgressModal
-				isOpen={currentPairIndex === dictionary.length}
+				isOpen={currentPairIndex === dictionary.length && dictionary.length > 0}
 				fails={progressStats.failedCount}
 				succeses={progressStats.learnedCount}
 				onRestart={handleRestart}

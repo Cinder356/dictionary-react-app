@@ -41,19 +41,19 @@
 	transform-style: preserve-3d;
 
 	.animation-swiping-left {
-		animation: slide-and-fade .3s ease forwards;
+		animation: slide-and-fade .1s ease forwards;
 		--card-sliding-direction: -1;
 		--card-sliding-bg-color: var(--red-color);
 	}
 
 	.animation-swiping-right {
-		animation: slide-and-fade .3s ease forwards;
+		animation: slide-and-fade .1s ease forwards;
 		--card-sliding-direction: 1;
 		--card-sliding-bg-color: var(--green-color);
 	}
 
 	.animation-next-card {
-		animation: getting-next-card .2s ease forwards;
+		animation: getting-next-card .1s ease forwards;
 	}
 
 	.flashcard-front,
@@ -72,7 +72,7 @@
 		box-shadow: $card-shadow;
 		border-radius: 1rem;
 		box-sizing: border-box;
-		transition: transform ease .7s;
+		transition: transform ease .3s;
 
 	}
 
