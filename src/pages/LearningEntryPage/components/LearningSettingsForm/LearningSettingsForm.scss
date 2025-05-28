@@ -14,3 +14,9 @@
 .form-top-margin {
 	margin-top: 1rem;
 }
+
+#modes-radio-group {
+	@media (max-width: 400px) {
+		flex-direction: column;
+	}
+}

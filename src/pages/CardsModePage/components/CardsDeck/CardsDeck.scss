@@ -12,12 +12,11 @@
 }
 
 .card-template {
-	@include card-size;
 	box-shadow: $card-shadow;
 	position: absolute;
 	background-color: var(--primary-color);
 	border-radius: 1rem;
-
+	@include card-size;
 }
 
 .second-card {

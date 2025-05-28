@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from 'react'
 import './RadioGroup.scss'
 
-export default function ({ options, name, defaultValue, onChange }) {
+export default function ({ options, name, defaultValue, onChange, ...props }) {
 	const [currentValue, setCurrentValue] = useState(defaultValue)
 
 	const handleChange = useCallback((event) => {
@@ -9,10 +9,9 @@ export default function ({ options, name, defaultValue, onChange }) {
 		onChange(event.target.value)
 	}, [])
 
-	// const radioButtons = useMemo(() => , [options, name, currentValue, handleChange])
 
 	return (
-		<div className='radio-group-container'>
+		<div className='radio-group-container' {...props}>
 			{options.map((option) =>
 				<label className={'radio-button' + (currentValue === option.value ? (' ' + 'checked') : '')} key={option.value}>
 					<input
@@ -23,7 +22,8 @@ export default function ({ options, name, defaultValue, onChange }) {
 						onChange={handleChange}
 					/>
 					{option.component}
-				</label>)}
+				</label>
+			)}
 		</div>
 	)
 }

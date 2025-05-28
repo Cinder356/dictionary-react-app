@@ -1,7 +1,7 @@
 import './Translation.scss'
-import btnColors from '../../app/consts/btnColors'
-import Button from '../../ui/Button/Button'
-import WordPairEditingModal from '../WordPairEditingModal/WordPairEditingModal'
+import btnColors from '../../../../app/consts/btnColors'
+import Button from '../../../../ui/Button/Button'
+import WordPairEditingModal from '../../../../components/WordPairEditingModal/WordPairEditingModal'
 import { useState } from 'react'
 
 export default function Translation({ id, left = '', right = '', onRemove, onEdit, }) {

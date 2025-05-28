@@ -1,6 +1,6 @@
 import NavBar from '/src/components/NavBar/NavBar'
 import './Header.scss'
-import logo from '/vite.svg'
+import logo from '/icons/logo.svg'
 
 export default function Header() {
 	return (
@@ -8,7 +8,7 @@ export default function Header() {
 			<div className="header-content-container">
 				<div id='logo-container'>
 					<img src={logo} alt="logo-error" />
-					<h1>Vite</h1>
+					<h1>LTerm</h1>
 				</div>
 
 				<NavBar />

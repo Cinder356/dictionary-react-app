@@ -4,69 +4,58 @@ import Button from "/src/ui/Button/Button"
 import Input from "/src/ui/Input/Input"
 import PageTitle from "/src//ui/PageTitle/PageTitle"
 import DeleteModal from "../DeleteModal/DeleteModal"
+import ImportModal from "../ImportModal/ImportModal"
 import { useCallback, useContext, useEffect, useState } from "react"
-import { getModuleMeta, addModule, editModule, deleteModule } from '/src/app/helpers/moduleController'
-import DictContext from "../../contexts/dict/DictContext"
+import { getModuleMeta, deleteModule } from '/src/app/helpers/moduleController'
+import ModuleDataContext from "../../contexts/moduleData/ModuleDataContext"
 import paths from '/src/app/consts/paths'
+import saveModule from "../../helpers/saveModule"
 
-export default function ({ id, isNew, dataSavingState, setDataSavingState, setModalOpenState }) {
-	const { dict } = useContext(DictContext)
+export default function ({ id, setModalOpenState }) {
 	const navigate = useNavigate()
+	const { dict, moduleMetaData, setModuleMetaData } = useContext(ModuleDataContext)
 	const [deleteModalState, setDeleteModalModal] = useState(false)
-	const [moduleMetaData, setModuleMetaData] = useState({
-		title: ''
-	})
+	const [importModalState, setImportModalState] = useState(false)
 
+	// loading meta
 	useEffect(() => {
-		if (isNew) return
+		if (id < 0) return
 		(async () => {
-			getModuleMeta(id).then(res => setModuleMetaData(res))
+			getModuleMeta(id).then(res => setModuleMetaData(res, false))
 		})()
-	}, [isNew])
-
-	const saveModule = useCallback(() => {
-		(async () => {
-			if (isNew) {
-				const receivedID = await addModule(moduleMetaData, dict)
-				navigate(paths.getEditing(receivedID))
-				return
-			}
-			return editModule(id, moduleMetaData, dict)
-		})()
-		setDataSavingState(true)
-	}, [moduleMetaData, dict])
+	}, [id])
 
 	const handleTitleInput = useCallback((event) => {
 		setModuleMetaData(prev => ({ ...prev, title: event.target.value }))
-		setDataSavingState(false)
 	}, [])
 
 	const handleDeleteButton = useCallback(() => {
-		if (isNew) return
+		if (id < 0) return
 		deleteModule(id)
 		navigate(paths.getView())
-	}, [id, isNew, navigate])
+	}, [id, navigate])
 
 	return (
 		<>
 			<div className="content-wrapper">
-				<PageTitle>{isNew ? 'New' : 'Editing'} module</PageTitle>
+				<PageTitle>{id < 0 ? 'New' : 'Editing'} module: {id}</PageTitle>
 
-				<form action="">
+				<div>
 					<label htmlFor="title"><b>Module title</b></label>
 					<Input className="fully-stretched" type="text" value={moduleMetaData.title} onChange={(e) => handleTitleInput(e)} />
 					<div className="button-line-wrapper">
 						<Button color={btnColors.RED} onClick={() => setDeleteModalModal(true)}>Delete</Button>
+						<Button onClick={() => setImportModalState(true)}>Import</Button>
 						<Button className='fully-stretched' onClick={() => setModalOpenState(true)}>Add pair</Button>
-						<Button
+						{id < 0 && <Button
 							className='fully-stretched'
 							color={btnColors.GREEN}
-							disabled={dataSavingState}
-							onClick={saveModule}>Save</Button>
+							onClick={() => saveModule(id, dict, moduleMetaData, navigate)}>Create</Button>}
 					</div>
-				</form>
+				</div>
 			</div>
 			<DeleteModal isOpen={deleteModalState} onClose={() => setDeleteModalModal(false)} onDelete={handleDeleteButton} />
+			<ImportModal isOpen={importModalState} onClose={() => setImportModalState(false)} />
 		</>
 	)
 }

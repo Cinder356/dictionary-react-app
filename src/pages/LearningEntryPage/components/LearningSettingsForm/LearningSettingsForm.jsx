@@ -37,6 +37,7 @@ export default function ({ moduleId }) {
 	return (
 		<div className="content-wrapper">
 			<PageTitle>Starting learning</PageTitle>
+			
 			<form action="">
 
 				<div className='form-top-margin'>

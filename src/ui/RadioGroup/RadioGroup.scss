@@ -4,10 +4,6 @@
 	flex-wrap: wrap;
 	gap: 10px;
 
-	@media (max-width: 500px) {
-		flex-direction: column;
-	}
-
 	.radio-button {
 		font-weight: bold;
 		user-select: none;

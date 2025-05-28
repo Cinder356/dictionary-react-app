@@ -1,7 +1,8 @@
-import EditingPage from '/src/pages/EditingPage/components/EditingPage/EditingPage'
-import ViewPage from '/src/pages/ViewPage/components/ViewPage/ViewPage'
-import LearningEntryPage from '/src/pages/LearningEntryPage/components/LearningEntryPage/LearningEntryPage'
-import CardsModePage from '/src/pages/CardsModePage/components/CardsModePage/CardsModePage'
+import EditingPage from '@/pages/EditingPage/components/EditingPage/EditingPage'
+import ViewPage from '@/pages/ViewPage/components/ViewPage/ViewPage'
+import LearningEntryPage from '@/pages/LearningEntryPage/components/LearningEntryPage/LearningEntryPage'
+import CardsModePage from '@/pages/CardsModePage/components/CardsModePage/CardsModePage'
+import TestModePage from '@/pages/TestModePage/components/TestModePage/TestModePage'
 
 export default Object.freeze([
 	{
@@ -23,5 +24,9 @@ export default Object.freeze([
 	{
 		path: '/learn/:id/cards',
 		element: <CardsModePage />
+	},
+	{
+		path: '/learn/:id/test',
+		element: <TestModePage />
 	}
 ])

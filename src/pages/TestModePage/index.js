@@ -1,0 +1,1 @@
+export { TestModePage } from './components/TestModePage/TestModePage'

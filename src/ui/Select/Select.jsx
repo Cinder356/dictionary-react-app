@@ -22,8 +22,8 @@ export default function ({ elementsArr, onChange, defaultKey = null, ...props })
 	}, [onChange, currentSelection])
 
 	return (
-		<div className='select' {...props}>
-			<div className='current-selection' onClick={() => setIsDropped(prev => !prev)}>
+		<div className='select' >
+			<div className='current-selection' onClick={() => setIsDropped(prev => !prev)} {...props}>
 				{currentSelection.text}
 			</div>
 			{isDropped && <div className='select-list'>

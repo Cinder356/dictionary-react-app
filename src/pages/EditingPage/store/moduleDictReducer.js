@@ -1,4 +1,3 @@
-import { useState, useReducer } from "react"
 import moduleDictActions from "../consts/moduleDictActions"
 
 export default (moduleDict, { type, ...payload }) => {

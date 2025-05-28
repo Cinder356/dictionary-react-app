@@ -1,19 +1,18 @@
 .btn {
-	background-color: transparent;
 	user-select: none;
 	border: none;
 	outline: none;
-	padding: 0.45rem 1.3rem;
+	padding: 0.35rem 1.1rem;
 	cursor: pointer;
 	border-radius: .8rem;
 	font-weight: bold;
-	// border: 2px solid;
-	transition: opacity 0.3s ease;
 	font-size: 1rem;
 	white-space: nowrap; // Запрещает перенос строк
 	overflow: hidden; // Скрывает выходящий за границы контент
 	text-overflow: ellipsis;
 	color: var(--accent-color);
+	transition: opacity 0.3s ease;
+	// transition: background-color ease .4s;
 
 	&.active-c {
 		background-color: var(--secondary-color);
@@ -69,11 +68,9 @@
 
 
 @media (hover: hover) {
-	.btn:hover {
-		opacity: 0.8;
-	}
 
-	.btn-transparent {
-		opacity: 0.8;
+	.btn:hover,
+	.btn-transparent:hover {
+		opacity: .7;
 	}
 }

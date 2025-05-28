@@ -1,15 +1,16 @@
 import { useContext, useEffect } from "react"
-import Translation from "/src/components/Translation/Translation"
+import Translation from "../Translation/Translation"
 import { getModuleDictinary, addModule } from '/src/app/helpers/moduleController'
-import DictContext from "../../contexts/dict/DictContext"
+import ModuleDataContext from "../../contexts/moduleData/ModuleDataContext"
 
-export default function ({ id, isNew, setDataSavingState }) {
-	const { dict, addPair, removePair, editPair, setDict } = useContext(DictContext)
+export default function ({ id }) {
+	const { dict, addPair, removePair, editPair, setDict } = useContext(ModuleDataContext)
 
+	//loading dict
 	useEffect(() => {
-		if (isNew) return
-		getModuleDictinary(id).then(loadedDict => setDict(loadedDict))
-	}, [isNew])
+		if (id < 0) return
+		getModuleDictinary(id).then(loadedDict => setDict(loadedDict, false))
+	}, [id])
 
 	return (
 		<div className="pair-list">
