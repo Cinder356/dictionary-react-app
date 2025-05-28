@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getModuleDictinary } from '../../../../app/helpers/moduleController'
-import shuffleArray from '../../../../app/helpers/shuffleArray';
+import { getModuleDictinary } from '@/app/helpers/moduleController'
+import shuffleArray from '@/app/helpers/shuffleArray';
+import PageTitle from '@/ui/PageTitle/PageTitle';
 import Card from '../Card/Card';
 import ProgressModal from '../ProgressModal/ProgressModal';
 import './CardsDeck.scss'
@@ -32,6 +33,9 @@ export default function ({ id }) {
 		setDictionary(prev => shuffleArray(prev))
 		setCurrentPairIndex(0)
 	}, [])
+
+	if (dictionary.length === 0)
+		return <div className='content-wrapper'><PageTitle>Empty module</PageTitle></div>
 
 	return (
 		<div className='deck-container'>

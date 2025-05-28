@@ -1,0 +1,45 @@
+.icon-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	user-select: none;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	border-radius: .4rem;
+	padding: .1rem;
+	transition: opacity 0.3s ease;
+	background: transparent;
+
+	// &.active-c {
+	// 	border-color: var(--secondary-color);
+	// }
+
+	// &.inactive-c {
+	// 	border-color: gray;
+	// }
+
+	// &.red-c {
+	// 	border-color: var(--red-color);
+	// }
+
+	// &.green-c {
+	// 	border-color: var(--green-color);
+	// }
+
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+
+	* {
+		width: 1.6rem;
+		height: 1.6rem;
+	}
+}
+
+@media (hover: hover) {
+	.icon-btn:hover {
+		opacity: .7;
+	}
+}

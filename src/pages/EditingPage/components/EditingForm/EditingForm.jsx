@@ -38,13 +38,15 @@ export default function ({ id, setModalOpenState }) {
 	return (
 		<>
 			<div className="content-wrapper">
-				<PageTitle>{id < 0 ? 'New' : 'Editing'} module: {id}</PageTitle>
+				<PageTitle>{id < 0 ? 'New' : 'Editing'} module</PageTitle>
 
 				<div>
 					<label htmlFor="title"><b>Module title</b></label>
 					<Input className="fully-stretched" type="text" value={moduleMetaData.title} onChange={(e) => handleTitleInput(e)} />
 					<div className="button-line-wrapper">
-						<Button color={btnColors.RED} onClick={() => setDeleteModalModal(true)}>Delete</Button>
+						{id >= 0 && <Button
+							color={btnColors.RED}
+							onClick={() => setDeleteModalModal(true)}>Delete</Button>}
 						<Button onClick={() => setImportModalState(true)}>Import</Button>
 						<Button className='fully-stretched' onClick={() => setModalOpenState(true)}>Add pair</Button>
 						{id < 0 && <Button

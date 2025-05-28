@@ -16,7 +16,27 @@
 }
 
 #modes-radio-group {
-	@media (max-width: 400px) {
+
+	.modes-radio-element {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: .3rem;
+
+		.radio-icon {
+			// uses in consts/modes.jsx
+			width: 1.3rem;
+			height: 1.3rem;
+		}
+	}
+}
+
+@media (max-width: 400px) {
+	#start-button-container {
+		justify-content: center;
+	}
+
+	#modes-radio-group {
 		flex-direction: column;
 	}
 }

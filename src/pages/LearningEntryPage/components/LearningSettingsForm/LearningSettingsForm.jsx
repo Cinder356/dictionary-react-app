@@ -1,12 +1,13 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { useNavigate } from "react-router-dom"
 import PageTitle from '/src/ui/PageTitle/PageTitle'
-import Select from '../../../../ui/Select/Select'
-import RadioGroup from '../../../../ui/RadioGroup/RadioGroup'
-import Button from '../../../../ui/Button/Button'
-import { getAllModulesMeta } from '../../../../app/helpers/moduleController'
+import Select from '@/ui/Select/Select'
+import RadioGroup from '@/ui/RadioGroup/RadioGroup'
+import Button from '@/ui/Button/Button'
+import { getAllModulesMeta } from '@/app/helpers/moduleController'
 import modes from '../../consts/modes'
 import './LearningSettingsForm.scss'
+import { getModuleMeta } from '@/app/helpers/moduleController'
 
 
 export default function ({ moduleId }) {
@@ -37,7 +38,7 @@ export default function ({ moduleId }) {
 	return (
 		<div className="content-wrapper">
 			<PageTitle>Starting learning</PageTitle>
-			
+
 			<form action="">
 
 				<div className='form-top-margin'>
