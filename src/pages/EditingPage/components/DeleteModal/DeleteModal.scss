@@ -1,16 +1,15 @@
-.delete-modal-caption {
-	text-align: center;
-	margin: 0 .4rem 1rem .4rem;
-}
+.delete-module-modal {
+	max-width: 500px;
+	padding: .3rem;
 
-.delete-modal-button-container {
-	display: flex;
-	justify-content: space-between;
-	// flex-wrap: wrap;
+	.delete-modal-caption {
+		text-align: center;
+		margin: .7rem .4rem .2rem .4rem;
+	}
 
-	@media (max-width: 290px) {
-		justify-content: center;
-		flex-wrap: wrap;
-		gap: .2rem;
+	.delete-modal-button-container {
+		display: flex;
+		justify-content: space-between;
+		margin: 0 5%;
 	}
 }

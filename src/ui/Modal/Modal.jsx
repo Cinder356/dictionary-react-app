@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { createPortal } from "react-dom";
 import './Modal.scss'
 
-export default function Modal({ children, isOpen, ...props }) {
+export default function Modal({ children, isOpen, onSubmit = null, ...props }) {
 	const dialogRef = useRef()
 
 	useEffect(() => {
@@ -16,7 +16,7 @@ export default function Modal({ children, isOpen, ...props }) {
 	if (!isOpen) return null
 
 	return createPortal(
-		<dialog ref={dialogRef} {...props}>{children}</dialog>,
+		<dialog onSubmit={onSubmit} ref={dialogRef} {...props}>{children}</dialog>,
 		document.getElementById('modal')
 	)
 }

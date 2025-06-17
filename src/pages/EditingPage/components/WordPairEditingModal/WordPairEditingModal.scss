@@ -1,0 +1,22 @@
+.new-pair-modal {
+	padding: .5rem 1rem;
+
+	.navigation-buttons-container {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.input-pair-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+
+		.input-pair-element {
+			width: 47%;
+			margin-bottom: 0;
+			padding-left: .4rem;
+			padding-right: .4rem;
+		}
+	}
+}

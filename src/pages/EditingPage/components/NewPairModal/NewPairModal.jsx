@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import DictContext from "../../contexts/moduleData/ModuleDataContext";
-import WordPairEditingModal from "/src/components/WordPairEditingModal/WordPairEditingModal"
+import WordPairEditingModal from "../WordPairEditingModal/WordPairEditingModal"
 
 export default function ({ modalOpenState, setModalOpenState }) {
 	const { addPair } = useContext(DictContext)
 
 	return (
 		<WordPairEditingModal
-			modalOpenState={modalOpenState}
-			setModalOpenState={setModalOpenState}
+			isOpen={modalOpenState}
+			onClose={() => setModalOpenState(false)}
 			onSubmit={addPair}
 		/>
 	)

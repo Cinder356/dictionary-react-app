@@ -1,0 +1,17 @@
+.form-btn-container {
+	margin-top: .5rem;
+	display: flex;
+	flex-direction: row;
+	width: max-content;
+	margin-left: auto;
+	gap: .2rem;
+	background-color: color-mix(in srgb, var(--primary-color), white 5%);
+	padding: .1rem .8rem;
+	border-radius: .7rem;
+	box-shadow: 3px 3px 10px rgba($color: black, $alpha: .2);
+
+	@media (max-width: 360px) {
+		margin-right: auto;
+		gap: .5rem;
+	}
+}

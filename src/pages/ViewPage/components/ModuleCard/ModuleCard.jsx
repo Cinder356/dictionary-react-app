@@ -1,14 +1,16 @@
 import './ModuleCard.scss'
-import Button from '/src/ui/Button/Button'
+import IconBtn from '@/ui/IconBtn/IconBtn'
+import PenSquareIcon from '@/app/icons/pen-square.svg?react'
+import TestIcon from '@/app/icons/test.svg?react'
 
 export default function ({ children, id, title, onEdit, onLearn, ...props }) {
 	return (
-		<div className="content-wrapper">
+		<div className="content-wrapper module-content-wrapper">
 			<div className="module-content">
 				<h3 className='module-card-caption'>{title}</h3>
 				<div className="module-card-button-container">
-					<Button onClick={() => onEdit(id)}>Edit</Button>
-					<Button onClick={() => onLearn(id)}>Learn</Button>
+					<IconBtn onClick={() => onEdit(id)}><PenSquareIcon className='secondary-icon' /></IconBtn>
+					<IconBtn onClick={() => onLearn(id)}><TestIcon className='secondary-icon' /></IconBtn>
 				</div>
 			</div>
 		</div>

@@ -6,7 +6,7 @@ $button-line-container-margin: 0.7rem;
 :root {
 	--background-color: #1c2027;
 	--primary-color: #252930;
-	--secondary-color: #6aa9b1;
+	--secondary-color: #84C3CB; // #6aa9b1
 	--accent-color: #EEEEEE;
 
 	--pink-color: #febebe; // #e24d70
@@ -50,7 +50,7 @@ $button-line-container-margin: 0.7rem;
 .content-wrapper {
 	max-width: variables.$max-content-width;
 	width: 95%;
-	margin: 1rem auto 0 auto;
+	margin: .8rem auto 0 auto;
 	background-color: var(--primary-color);
 	padding: .7rem 1rem;
 	border-radius: 0.8rem;
@@ -74,7 +74,7 @@ $button-line-container-margin: 0.7rem;
 
 .red-icon {
 	path {
-		stroke: var(--red-color);
+		stroke: color-mix(in srgb, var(--red-color), white 8%);
 	}
 }
 
@@ -86,7 +86,7 @@ $button-line-container-margin: 0.7rem;
 
 .secondary-icon {
 	path {
-		stroke: var(--secondary-color);
+		stroke: color-mix(in srgb, var(--secondary-color), white 15%);
 	}
 }
 
@@ -96,23 +96,23 @@ $button-line-container-margin: 0.7rem;
 	}
 }
 
-.button-line-wrapper {
-	display: flex;
-	width: 100%;
-	flex-wrap: wrap;
-	gap: $button-line-container-margin;
-	margin: $button-line-container-margin auto;
+// .button-line-wrapper {
+// 	display: flex;
+// 	width: 100%;
+// 	flex-wrap: wrap;
+// 	gap: $button-line-container-margin;
+// 	margin: $button-line-container-margin auto;
 
-	* {
-		flex: 1 1 calc(25% - $button-line-container-margin);
-		min-width: max-content;
+// 	* {
+// 		flex: 1 1 calc(25% - $button-line-container-margin);
+// 		min-width: max-content;
 
-		@media (max-width: variables.$mobile-size-limit) {
-			flex: 1 1 calc(50% - $button-line-container-margin);
-		}
+// 		@media (max-width: variables.$mobile-size-limit) {
+// 			flex: 1 1 calc(50% - $button-line-container-margin);
+// 		}
 
-		@media (max-width: calc(variables.$mobile-size-limit * .8)) {
-			flex: 1 1 calc(100% - $button-line-container-margin);
-		}
-	}
-}
+// 		@media (max-width: calc(variables.$mobile-size-limit * .8)) {
+// 			flex: 1 1 calc(100% - $button-line-container-margin);
+// 		}
+// 	}
+// }

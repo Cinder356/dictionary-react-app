@@ -8,8 +8,11 @@
 	cursor: pointer;
 	border-radius: .4rem;
 	padding: .1rem;
-	transition: opacity 0.3s ease;
 	background: transparent;
+
+	svg {
+		transition: transform 0.2s ease;
+	}
 
 	// &.active-c {
 	// 	border-color: var(--secondary-color);
@@ -39,7 +42,7 @@
 }
 
 @media (hover: hover) {
-	.icon-btn:hover {
-		opacity: .7;
+	.icon-btn:hover svg {
+		transform: scale(1.2);
 	}
 }
