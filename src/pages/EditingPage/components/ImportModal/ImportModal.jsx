@@ -54,7 +54,7 @@ export default function ({ isOpen, onClose }) {
 			addPair(pair)
 		}
 		setCurrentText('')
-	}, [currentText, currentTermSeparatorI, currentPairSeparatorI])
+	}, [currentText, currentTermSeparatorI, currentPairSeparatorI, termCustomSep, pairCustomSep])
 
 
 	return (
