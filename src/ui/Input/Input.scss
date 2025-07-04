@@ -20,4 +20,8 @@
 	&.error {
 		border-color: var(--red-color);
 	}
+
+	&.success {
+		border-color: var(--green-color);
+	}
 }

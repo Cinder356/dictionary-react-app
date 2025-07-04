@@ -1,6 +1,6 @@
-import PageTitle from '../../../../ui/PageTitle/PageTitle'
+import PageTitle from '@/ui/PageTitle/PageTitle'
 import CardsDeck from '../CardsDeck/CardsDeck'
-import useUrlValidModuleId from '../../../../app/hooks/useUrlValidModuleId'
+import useUrlValidModuleId from '@/app/hooks/useUrlValidModuleId'
 
 export default function () {
 	const id = useUrlValidModuleId()

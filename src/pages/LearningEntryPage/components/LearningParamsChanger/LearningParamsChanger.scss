@@ -1,0 +1,24 @@
+.learning-toggle-container {
+	display: grid;
+	grid-template-columns: repeat(2, max-content 1fr);
+	column-gap: 30px;
+	row-gap: 10px;
+	font-weight: bold;
+	overflow: hidden;
+
+	>*:nth-child(even) {
+		margin-left: auto;
+	}
+
+	>*:nth-child(4n - 1) {
+		margin-left: 1rem;
+	}
+
+	@media(max-width: 600px) {
+		grid-template-columns: 2fr 1fr;
+
+		>*:nth-child(4n - 1) {
+			margin-left: 0;
+		}
+	}
+}

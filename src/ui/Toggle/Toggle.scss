@@ -1,0 +1,47 @@
+$toggle-width: 3.4rem;
+$toggle-height: 1.6rem;
+$circle-size: 1.1rem;
+$circle-offset: .3rem;
+
+.toggle {
+	position: relative;
+	display: inline-block;
+	width: $toggle-width;
+	height: $toggle-height;
+}
+
+.toggle-input {
+	display: none;
+}
+
+.toggle-slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	transition: .4s;
+	border-radius: 34px;
+}
+
+.toggle-slider:before {
+	position: absolute;
+	content: "";
+	height: $circle-size;
+	width: $circle-size;
+	left: $circle-offset;
+	bottom: calc(($toggle-height - $circle-size) / 2);
+	background-color: var(--primary-color);
+	transition: .3s;
+	border-radius: 50%;
+}
+
+.toggle-input:checked+.toggle-slider {
+	background-color: var(--secondary-color);
+}
+
+.toggle-input:checked+.toggle-slider:before {
+	transform: translateX(calc($toggle-width - $circle-size - 2 * $circle-offset));
+}

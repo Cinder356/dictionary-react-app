@@ -1,0 +1,12 @@
+.progress-bar {
+	padding: 0;
+	height: .4rem;
+
+	.progress {
+		height: 100%;
+		border-radius: inherit;
+		background-color: var(--secondary-color);
+		box-shadow: 0 0 18px var(--secondary-color);
+		transition: width ease .5s;
+	}
+}

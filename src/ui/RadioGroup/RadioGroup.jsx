@@ -13,7 +13,7 @@ export default function ({ options, name, defaultValue, onChange, ...props }) {
 	return (
 		<div className='radio-group-container' {...props}>
 			{options.map((option) =>
-				<label className={'radio-button' + (currentValue === option.value ? (' ' + 'checked') : '')} key={option.value}>
+				<label className={'radio-button' + (currentValue == option.value ? (' ' + 'checked') : '')} key={option.value}>
 					<input
 						className='radio-element'
 						type="radio"

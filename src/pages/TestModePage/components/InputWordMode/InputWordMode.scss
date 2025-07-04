@@ -1,0 +1,21 @@
+#input-word-correct-answer {
+	color: var(--green-color);
+	text-align: center;
+}
+
+#test-definition-input-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 1.5rem 0;
+	gap: .5rem;
+
+	#test-definition-input {
+		min-width: 0;
+		flex: 1;
+	}
+
+	#test-definition-submit-btn {
+		flex-shrink: 0
+	}
+}

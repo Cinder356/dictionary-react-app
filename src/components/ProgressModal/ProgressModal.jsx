@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import paths from '../../../../app/consts/paths'
-import Modal from '../../../../ui/Modal/Modal'
-import Button from '../../../../ui/Button/Button'
-import btnColors from '../../../../app/consts/btnColors'
+import paths from '@/app/consts/paths'
+import Modal from '@/ui/Modal/Modal'
+import Button from '@/ui/Button/Button'
+import btnColors from '@/app/consts/btnColors'
 import './ProgressModal.scss'
 
-export default function ({ children, isOpen, fails, succeses, onRestart, ...props }) {
+export default function ({ isOpen, fails, succeses, onRestart }) {
 	const navigate = useNavigate()
 
 	return (

@@ -1,5 +1,5 @@
-import { useState, useEffect, useMemo, useCallback } from 'react'
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react'
+import { isSession, useNavigate } from "react-router-dom"
 import PageTitle from '/src/ui/PageTitle/PageTitle'
 import Select from '@/ui/Select/Select'
 import RadioGroup from '@/ui/RadioGroup/RadioGroup'
@@ -7,14 +7,16 @@ import Button from '@/ui/Button/Button'
 import { getAllModulesMeta } from '@/app/helpers/moduleController'
 import modes from '../../consts/modes'
 import './LearningSettingsForm.scss'
-import { getModuleMeta } from '@/app/helpers/moduleController'
-
+import LearningParamsChanger from '../LearningParamsChanger/LearningParamsChanger'
 
 export default function ({ moduleId }) {
 	const navigate = useNavigate()
 	const [modulesMeta, setModulesMeta] = useState([])
 	const [currentModuleId, setCurrentModuleId] = useState()
-	const [currentMode, setCurrentMode] = useState(modes[0].value)
+	const [currentModeIndex, setCurrentModeIndex] = useState(modes[0].value)
+	const learningParamsRef = useRef({
+		isReverse: false,
+	})
 
 	useEffect(() => {
 		getAllModulesMeta().then((val) => setModulesMeta(val))
@@ -30,10 +32,17 @@ export default function ({ moduleId }) {
 		}));
 	}, [modulesMeta]);
 
-	const handleStartBtn = useCallback(
-		() => navigate(modes[parseInt(currentMode)].getPath(currentModuleId)),
-		[currentMode, navigate, modes, currentModuleId]
-	)
+	const handleStartBtn = useCallback(() => {
+		const searchParams = new URLSearchParams()
+		for (const key in learningParamsRef.current) {
+			if (modes[currentModeIndex].requiredParams.includes(key))
+				searchParams.append(key, learningParamsRef.current[key])
+		}
+		navigate({
+			pathname: modes[currentModeIndex].getPath(currentModuleId),
+			search: searchParams.toString()
+		})
+	}, [currentModeIndex, navigate, modes, currentModuleId])
 
 	return (
 		<div className="content-wrapper">
@@ -42,7 +51,7 @@ export default function ({ moduleId }) {
 			<form action="">
 
 				<div className='form-top-margin'>
-					<label htmlFor="module-select"><b>Module:</b> {currentModuleId} </label>
+					<label htmlFor="module-select"><b>Module:</b></label>
 					<Select
 						id='module-select'
 						elementsArr={selectElementsArr}
@@ -51,15 +60,15 @@ export default function ({ moduleId }) {
 				</div>
 
 				<div className='form-top-margin'>
-					<label htmlFor="modes-radio-group"><b>Learning mode:</b> {currentMode} </label>
-					<RadioGroup id='modes-radio-group' options={modes} name='mode' defaultValue={modes[0].value} onChange={(val) => setCurrentMode(val)} />
+					<label htmlFor="modes-radio-group"><b>Learning mode:</b></label>
+					<RadioGroup id='modes-radio-group' options={modes} name='mode' defaultValue={modes[0].value} onChange={(val) => setCurrentModeIndex(val)} />
 				</div>
 
-				<div id='start-button-container' className='form-top-margin'>
+				<LearningParamsChanger learningParamsRef={learningParamsRef} currentModeIndex={currentModeIndex} className='form-top-margin' />
+
+				<div id='start-button-container'>
 					<Button id='start-button' disabled={currentModuleId < 0} onClick={handleStartBtn}>Start</Button>
 				</div>
-
-
 			</form >
 		</div >
 	)

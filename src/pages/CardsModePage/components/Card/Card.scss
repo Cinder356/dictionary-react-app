@@ -59,6 +59,7 @@
 	.flashcard-front,
 	.flashcard-back {
 		position: absolute;
+		padding: .5rem;
 		width: 100%;
 		height: 100%;
 		backface-visibility: hidden;
@@ -66,14 +67,17 @@
 		justify-content: center;
 		align-items: center;
 		text-align: center;
-		// hyphens: auto;
-		word-break: break-all;
+		hyphens: auto;
+		overflow-wrap: break-word;
 		background-color: var(--primary-color);
 		box-shadow: $card-shadow;
 		border-radius: 1rem;
 		box-sizing: border-box;
-		transition: transform ease .3s;
+		transition: transform .3s ease;
 
+		.animation-next-card {
+			transition: none;
+		}
 	}
 
 	.flashcard-front {

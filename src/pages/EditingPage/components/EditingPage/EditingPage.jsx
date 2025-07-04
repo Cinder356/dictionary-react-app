@@ -2,7 +2,7 @@ import { useState } from "react"
 import EditingForm from "../EditingForm/EditingForm"
 import PairList from "../PairList/PairList"
 import NewPairModal from '../NewPairModal/NewPairModal'
-import ModuleDataContext from "../../contexts/moduleData/ModuleDataProvider"
+import ModuleDataProvider from "../../contexts/moduleData/ModuleDataProvider"
 import useUrlValidModuleId from "@/app/hooks/useUrlValidModuleId"
 
 export default function CreatePage() {
@@ -10,10 +10,10 @@ export default function CreatePage() {
 	const id = useUrlValidModuleId()
 
 	return (
-		<ModuleDataContext id={id} >
+		<ModuleDataProvider id={id} >
 			<EditingForm id={id} setModalOpenState={setModalOpenState} />
 			<NewPairModal modalOpenState={modalOpenState} setModalOpenState={setModalOpenState} />
 			<PairList id={id} />
-		</ModuleDataContext>
+		</ModuleDataProvider>
 	)
 }

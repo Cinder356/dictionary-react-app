@@ -1,22 +1,17 @@
-import { useState, useEffect, useCallback } from 'react';
-import { getModuleDictinary } from '@/app/helpers/moduleController'
+import { useState, useCallback } from 'react';
 import shuffleArray from '@/app/helpers/shuffleArray';
 import PageTitle from '@/ui/PageTitle/PageTitle';
 import Card from '../Card/Card';
-import ProgressModal from '../ProgressModal/ProgressModal';
+import ProgressModal from '@/components/ProgressModal/ProgressModal';
 import './CardsDeck.scss'
+import useUrlMixedDict from "@/app/hooks/useUrlMixedDict";
 
 const defaultProgressStats = { failedCount: 0, learnedCount: 0 }
 
 export default function ({ id }) {
-	const [dictionary, setDictionary] = useState([])
+	const [dictionary, setDictionary] = useUrlMixedDict(id)
 	const [currentPairIndex, setCurrentPairIndex] = useState(0)
 	const [progressStats, setProgressStats] = useState(defaultProgressStats)
-
-	useEffect(() => {
-		if (id < 0) return
-		getModuleDictinary(id).then((dict) => setDictionary(shuffleArray(dict)))
-	}, [id])
 
 	const handleLeftSwipe = useCallback(() => {
 		setProgressStats(prev => ({ failedCount: prev.failedCount + 1, learnedCount: prev.learnedCount }))

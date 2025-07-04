@@ -1,4 +1,4 @@
 
-export default function ({ children }) {
-	return <h2 style={{ textAlign: 'center' }}>{children}</h2>
+export default function ({ children, ...props }) {
+	return <h2 style={{ textAlign: 'center' }} {...props}>{children}</h2>
 }
