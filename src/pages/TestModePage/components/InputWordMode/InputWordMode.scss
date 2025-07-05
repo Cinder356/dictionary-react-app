@@ -1,6 +1,8 @@
 #input-word-correct-answer {
 	color: var(--green-color);
 	text-align: center;
+	hyphens: 'auto';
+	word-break: 'break-all';
 }
 
 #test-definition-input-container {

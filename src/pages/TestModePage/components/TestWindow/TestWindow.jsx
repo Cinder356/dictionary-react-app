@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Button from '@/ui/Button/Button'
 import DefPickMode from '../DefPickMode/DefPickMode'
 import InputWordMode from '../InputWordMode/InputWordMode'
@@ -29,7 +29,7 @@ export default function ({ dict, currentDictIndex, proceed }) {
 		isCorrectRef.current = isCorrect
 	}
 
-	const handleProceed = (e) => {
+	const handleProceed = () => {
 		setIsAnswered(false)
 		proceed(isCorrectRef.current)
 		isCorrectRef.current = false
