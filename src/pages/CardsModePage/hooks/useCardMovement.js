@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import cardAnimationClasses from "../consts/cardAnimationClasses"
 
-const MIN_SWIPE_OFFSET = 100
+const MIN_SWIPE_OFFSET = 60
 
 export default function (flashcardRef, isAnimatingRef, setIsFlipped, handleSwipe, setCurrentAnimationClass) {
 	const isDraggingRef = useRef(false)
