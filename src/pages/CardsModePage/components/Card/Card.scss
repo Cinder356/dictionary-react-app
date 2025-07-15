@@ -2,19 +2,21 @@
 @use '../../styles/card-settings' as *;
 
 :root {
+	--current-card-offset-x: 0;
+	--current-card-rotation: 0;
 	--card-sliding-direction: -1;
 	--card-sliding-bg-color: black;
 }
 
 @keyframes slide-and-fade {
 	0% {
-		transform: translateX(0px);
+		transform: translateX(calc(var(--current-card-offset-x) * 1px)) rotate(var(--current-card-rotation));
 		opacity: 1;
 	}
 
 	100% {
 		background-color: var(--card-sliding-bg-color);
-		transform: translateX(calc(100px * var(--card-sliding-direction)));
+		transform: translateX(calc(var(--current-card-offset-x) * 1px + 100px * var(--card-sliding-direction))) rotate(var(--current-card-rotation));
 		opacity: 0;
 	}
 
@@ -31,34 +33,41 @@
 }
 
 .flashcard {
+	--current-card-rotation: calc(.05 * var(--current-card-offset-x) * 1deg);
+	transform: translateX(calc(var(--current-card-offset-x) * 1px)) rotate(var(--current-card-rotation));
+
+	touch-action: none;
 	position: relative;
 	cursor: pointer;
 	user-select: none;
-	font-weight: bold;
-	font-size: 1.5rem;
 	will-change: transform;
 	transform-style: preserve-3d;
+	-webkit-tap-highlight-color: transparent;
 	@include card-size;
 
-	.animation-swiping-left {
-		animation: slide-and-fade .3s ease forwards;
+	&.swiping-left-animation {
 		--card-sliding-direction: -1;
-		--card-sliding-bg-color: var(--red-color);
+		animation: slide-and-fade .5s ease forwards;
 	}
 
-	.animation-swiping-right {
-		animation: slide-and-fade .3s ease forwards;
+	&.swiping-right-animation {
 		--card-sliding-direction: 1;
-		--card-sliding-bg-color: var(--green-color);
+		animation: slide-and-fade .5s ease forwards;
 	}
 
-	.animation-next-card {
-		animation: getting-next-card .2s ease forwards;
+	&.next-card-animation {
+		animation: getting-next-card .3s ease forwards;
+	}
+
+	&.getting-back {
+		transition: transform .2s ease;
 	}
 
 	.flashcard-front,
 	.flashcard-back {
 		position: absolute;
+		font-weight: bold;
+		font-size: 1.5rem;
 		padding: .5rem;
 		width: 100%;
 		height: 100%;
@@ -73,11 +82,11 @@
 		box-shadow: $card-shadow;
 		border-radius: 1rem;
 		box-sizing: border-box;
-		transition: transform .3s ease;
+	}
 
-		.animation-next-card {
-			transition: none;
-		}
+	&.has-flip-animation .flashcard-front,
+	&.has-flip-animation .flashcard-back {
+		transition: transform .3s ease;
 	}
 
 	.flashcard-front {

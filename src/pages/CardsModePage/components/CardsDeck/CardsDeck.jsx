@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import shuffleArray from '@/app/helpers/shuffleArray';
 import PageTitle from '@/ui/PageTitle/PageTitle';
 import Card from '../Card/Card';
@@ -13,21 +13,19 @@ export default function ({ id }) {
 	const [currentPairIndex, setCurrentPairIndex] = useState(0)
 	const [progressStats, setProgressStats] = useState(defaultProgressStats)
 
-	const handleLeftSwipe = useCallback(() => {
-		setProgressStats(prev => ({ failedCount: prev.failedCount + 1, learnedCount: prev.learnedCount }))
+	const handleSwipe = (direction) => {
+		if (direction === 'left')
+			setProgressStats(prev => ({ failedCount: prev.failedCount + 1, learnedCount: prev.learnedCount }))
+		else if (direction === 'right')
+			setProgressStats(prev => ({ failedCount: prev.failedCount, learnedCount: prev.learnedCount + 1 }))
 		setCurrentPairIndex(prev => prev + 1)
-	}, [])
+	}
 
-	const handleRightSwipe = useCallback(() => {
-		setProgressStats(prev => ({ failedCount: prev.failedCount, learnedCount: prev.learnedCount + 1 }))
-		setCurrentPairIndex(prev => prev + 1)
-	}, [])
-
-	const handleRestart = useCallback(() => {
+	const handleRestart = () => {
 		setProgressStats(defaultProgressStats)
 		setDictionary(prev => shuffleArray(prev))
 		setCurrentPairIndex(0)
-	}, [])
+	}
 
 	if (dictionary.length === 0)
 		return <div className='content-wrapper'><PageTitle>Empty module</PageTitle></div>
@@ -37,8 +35,7 @@ export default function ({ id }) {
 			{currentPairIndex < dictionary.length && <Card
 				term={dictionary[currentPairIndex].left}
 				translation={dictionary[currentPairIndex].right}
-				onLeftSwipe={handleLeftSwipe}
-				onRightSwipe={handleRightSwipe}
+				onSwipe={handleSwipe}
 			/>}
 			{currentPairIndex + 1 < dictionary.length && <div className='card-template second-card'>{dictionary[currentPairIndex + 1].left}</div>}
 			{currentPairIndex + 2 < dictionary.length && <div className='card-template third-card' />}

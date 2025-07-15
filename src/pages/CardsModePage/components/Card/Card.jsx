@@ -1,108 +1,67 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import useCardMovement from '../../hooks/useCardMovement'
+import cardAnimationClasses from "../../consts/cardAnimationClasses"
 import './Card.scss'
 
-const ANIMATION_CLASSES = Object.freeze({
-	swipingLeft: 'animation-swiping-left',
-	swipingRight: 'animation-swiping-right',
-	gettingNextCard: 'animation-next-card'
-})
-
-export default function ({ term, translation, onLeftSwipe, onRightSwipe }) {
+export default function ({ term, translation, onSwipe }) {
 	const [isFlipped, setIsFlipped] = useState(false)
 	const [currentAnimationClass, setCurrentAnimationClass] = useState('')
-	const [cardOffset, setCardOffset] = useState(0);
-	const isTouching = useRef(false)
-	const isAnimating = useRef(false)
-	const touchStartXRef = useRef(0)
+	const hasFlipAnimation = useRef(true)
+	const isAnimatingRef = useRef(false)
+	const flashcardRef = useRef(null)
 
-	const handleClick = useCallback(() => setIsFlipped(prev => !prev))
+	const handleSwipe = (swipeDirection) => {
+		if (swipeDirection === 'left')
+			setCurrentAnimationClass(cardAnimationClasses.swipingLeft)
+		else if (swipeDirection === 'right')
+			setCurrentAnimationClass(cardAnimationClasses.swipingRight)
+		isAnimatingRef.current = true;
+	}
 
-	const handleTouchStart = useCallback((e) => {
-		if (isAnimating.current || isTouching.current) return
+	const { handlePointerDown, handlePointerMove, handlePointerUp, moveCard } = useCardMovement(flashcardRef, isAnimatingRef, setIsFlipped, handleSwipe, setCurrentAnimationClass)
 
-		touchStartXRef.current = e.clientX
-		isTouching.current = true
-	}, [isAnimating, isTouching])
-
-	const handleTouchMove = useCallback((e) => {
-		if (isAnimating.current || !isTouching.current) return
-		e.preventDefault();
-
-		const currentX = e.clientX
-		const diff = currentX - touchStartXRef.current
-		setCardOffset(diff)
-	}, [isAnimating, isTouching, touchStartXRef])
-
-	const handleTouchEnd = useCallback((e) => {
-		if (isAnimating.current && !isTouching.current) return
-
-		if (cardOffset < -60) {
-			setCurrentAnimationClass(ANIMATION_CLASSES.swipingLeft)
-			isAnimating.current = true
+	const handleAnimationEnd = () => {
+		switch (currentAnimationClass) {
+			case cardAnimationClasses.swipingLeft:
+				onSwipe('left')
+				setIsFlipped(false)
+				setCurrentAnimationClass(cardAnimationClasses.gettingNextCard)
+				hasFlipAnimation.current = false
+				moveCard(0)
+				break
+			case cardAnimationClasses.swipingRight:
+				onSwipe('right')
+				setIsFlipped(false)
+				setCurrentAnimationClass(cardAnimationClasses.gettingNextCard)
+				hasFlipAnimation.current = false
+				moveCard(0)
+				break
+			case cardAnimationClasses.gettingBack:
+			case cardAnimationClasses.gettingNextCard:
+				isAnimatingRef.current = false
+				setCurrentAnimationClass('')
+				hasFlipAnimation.current = true
+				break
 		}
-		else if (cardOffset > 60) {
-			setCurrentAnimationClass(ANIMATION_CLASSES.swipingRight)
-			isAnimating.current = true
-		}
-		else if (cardOffset === 0)
-			handleClick()
-		else
-			setCardOffset(0)
-		isTouching.current = false
-	}, [isAnimating, isTouching, cardOffset, handleClick])
-
-	const handlePointerOut = useCallback((e) => {
-		if (isTouching.current)
-			handleTouchEnd(e)
-	}, [isTouching, handleTouchEnd])
-
-	// const handleAnimationStart = useCallback((e) => {
-	// 	if (currentAnimationClass === ANIMATION_CLASSES.swipingLeft || currentAnimationClass === ANIMATION_CLASSES.swipingRight)
-	// 		setIsFlipped(false)
-	// }, [currentAnimationClass])
-
-	const handleAnimationEnd = useCallback((e) => {
-		const isLeftSwipingAnimation = currentAnimationClass === ANIMATION_CLASSES.swipingLeft
-		const isRightSwipingAnimation = currentAnimationClass === ANIMATION_CLASSES.swipingRight
-		if (isLeftSwipingAnimation || isRightSwipingAnimation) {
-			setCardOffset(0)
-			setIsFlipped(false)
-			setCurrentAnimationClass(ANIMATION_CLASSES.gettingNextCard)
-			isAnimating.current = true
-
-			if (isLeftSwipingAnimation)
-				onLeftSwipe()
-			else
-				onRightSwipe()
-		}
-		else if (currentAnimationClass === ANIMATION_CLASSES.gettingNextCard) {
-			setCurrentAnimationClass('')
-			isAnimating.current = false
-		}
-	}, [isAnimating, currentAnimationClass, onLeftSwipe, onRightSwipe])
+	}
 
 	return (
-		<>
-			<div
-				style={{
-					transform: `translateX(${cardOffset}px) rotate(${cardOffset * .04}deg)`,
-					touchAction: 'none'
-				}}
-				className={"flashcard" + (isFlipped ? ' ' + 'flipped' : '')}
-				onPointerDown={handleTouchStart}
-				onPointerMove={handleTouchMove}
-				onPointerUp={handleTouchEnd}
-				onPointerOut={handlePointerOut}
-				onAnimationEnd={handleAnimationEnd}
-			>
-				<div
-					className={'flashcard-front' + (!isFlipped ? ' ' + currentAnimationClass : '')}
-				>{term}</div>
-
-				<div
-					className={'flashcard-back' + (isFlipped ? ' ' + currentAnimationClass : '')}
-				>{translation}</div>
-			</div >
-		</>
+		<div
+			ref={flashcardRef}
+			className={'flashcard' + ' '
+				+ currentAnimationClass
+				+ (isFlipped ? ' flipped' : '')
+				+ (hasFlipAnimation.current ? ' has-flip-animation' : '')
+			}
+			onPointerDown={handlePointerDown}
+			onPointerMove={handlePointerMove}
+			onPointerUp={handlePointerUp}
+			onPointerOut={handlePointerUp}
+			onAnimationEnd={handleAnimationEnd}
+			onTransitionEnd={handleAnimationEnd}
+		>
+			<div className="flashcard-front">{term}</div>
+			<div className="flashcard-back">{translation}</div>
+		</div>
 	)
 }
