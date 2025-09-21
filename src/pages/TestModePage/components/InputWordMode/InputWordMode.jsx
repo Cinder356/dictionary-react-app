@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import TermCaption from '../TermCaption/TermCaption'
 import Input from '@/ui/Input/Input'
 import Button from '@/ui/Button/Button'
@@ -8,19 +8,27 @@ export default function ({ dict, currentDictIndex, onAnswer, modeEnterHandlerRef
 	const [isAnswered, setIsAnswered] = useState(false)
 	const [isCorrect, setIsCorrect] = useState(false)
 	const [inputText, setInputText] = useState('')
+	const inputTextRef = useRef('');
 	const inputRef = useRef()
 
 	useEffect(() => {
 		setIsAnswered(false)
 		setIsCorrect(false)
 		setInputText('')
+		inputTextRef.current = ''
 	}, [dict, currentDictIndex])
 
 	const handleChecking = () => {
 		if (isAnswered) return
-		const term = dict[currentDictIndex].left.replace(/\s/g, '').toLowerCase()
-		const def = inputText.replace(/\s/g, '').toLowerCase()
-		const correctness = term.includes(def) && def
+		const terms = dict[currentDictIndex].left
+			.replace(/\s/g, '')
+			.toLowerCase()
+			.split(',')
+		const defs = inputTextRef.current
+			.replace(/\s/g, '')
+			.toLowerCase()
+			.split(',')
+		const correctness = defs.every(def => terms.includes(def)) && defs
 
 		setIsCorrect(correctness)
 		setIsAnswered(true)
@@ -30,6 +38,12 @@ export default function ({ dict, currentDictIndex, onAnswer, modeEnterHandlerRef
 	const enterHandler = () => {
 		handleChecking()
 		inputRef.current?.blur()
+	}
+
+	const handleInputChange = (e) => {
+		const value = e.target.value
+		setInputText(value);
+		inputTextRef.current = value;
 	}
 
 	return (
@@ -43,7 +57,7 @@ export default function ({ dict, currentDictIndex, onAnswer, modeEnterHandlerRef
 					isWrong={isAnswered && !isCorrect}
 					isCorrect={isAnswered && isCorrect}
 					value={inputText}
-					onChange={val => setInputText(val.target.value)}
+					onChange={handleInputChange}
 					onFocus={() => modeEnterHandlerRef.current = enterHandler}
 					onBlur={() => modeEnterHandlerRef.current = null}
 				/>

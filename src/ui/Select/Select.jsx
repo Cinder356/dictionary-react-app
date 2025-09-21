@@ -4,7 +4,7 @@ import './Select.scss'
 
 const DEFAULT_TEXT = 'Choose anything'
 
-export default function ({ elementsArr, onChange, defaultKey = null, ...props }) { // я хз чё делать с defaultText
+export default function ({ elementsArr, onChange, defaultKey = null, translate = 'yes', ...props }) { // я хз чё делать с defaultText
 	const [isDropped, setIsDropped] = useState(false)
 	const [currentSelection, setCurrentSelection] = useState({ key: null, value: null, text: DEFAULT_TEXT })
 
@@ -22,13 +22,13 @@ export default function ({ elementsArr, onChange, defaultKey = null, ...props })
 	}, [onChange, currentSelection])
 
 	return (
-		<div className='select' >
+		<div className='select' translate={translate} >
 			<div className='current-selection' onClick={() => setIsDropped(prev => !prev)} {...props}>
 				<p>{currentSelection.text}</p>
 			</div>
 			{isDropped && <div className='select-list'>
 				{elementsArr.length === 0 && <PageTitle>Empty</PageTitle>}
-				{elementsArr.map((elemParams) => <div className='select-list-element' key={elemParams.key} onClick={() => handleSelection(elemParams.key, elemParams.value, elemParams.text)}>{elemParams.text}</div>)}
+				{elementsArr.map((elemParams) => <div translate={translate} className='select-list-element' key={elemParams.key} onClick={() => handleSelection(elemParams.key, elemParams.value, elemParams.text)}>{elemParams.text}</div>)}
 			</div>}
 			<span className='select-icon' />
 		</div>

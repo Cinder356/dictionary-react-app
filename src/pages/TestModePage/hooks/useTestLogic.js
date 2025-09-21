@@ -28,7 +28,7 @@ export default function () {
 		setCurrentDictIndex(0)
 		setProgressValue(0)
 		setProgressModalState(false)
-		setDict(prev => shuffleArray(prev))
+		setDict(prev => [...shuffleArray(prev)])
 	}
 
 	return {

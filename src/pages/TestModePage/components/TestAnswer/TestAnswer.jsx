@@ -10,7 +10,7 @@ export default function ({ isCorrect = false, isWrong = false, definition, onCli
 
 	return (
 		<div className={`test-answer ${additionalClass}`} onClick={onClick}>
-			<p>{definition}</p>
+			<p translate='no'>{definition}</p>
 		</div>
 	)
 }

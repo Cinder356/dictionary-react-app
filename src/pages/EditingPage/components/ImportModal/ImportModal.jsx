@@ -66,7 +66,7 @@ export default function ({ isOpen, onClose }) {
 					<RadioGroup id='term-sep-group' options={TERM_SEPARATORS} name='term-sep-group' defaultValue={TERM_SEPARATORS[0].value} onChange={(val) => setCurrentTermSeparatorI(val)} />
 					{!TERM_SEPARATORS[parseInt(currentTermSeparatorI)].sep &&
 						<span className='custom-sep-input-container'>
-							<label htmlFor="custom-term-sep-input">Custom: </label>
+							<label htmlFor="custom-term-sep-input">Term separator: </label>
 							<Input value={termCustomSep} onChange={(e) => setTermCustomSep(e.target.value)} id='custom-term-sep-input' />
 						</span>}
 				</div>
@@ -75,7 +75,7 @@ export default function ({ isOpen, onClose }) {
 					<RadioGroup id='pair-sep-group' options={PAIR_SEPARATORS} name='pair-sep-group' defaultValue={PAIR_SEPARATORS[0].value} onChange={(val) => setCurrentPairSeparatorI(val)} />
 					{!PAIR_SEPARATORS[parseInt(currentPairSeparatorI)].sep &&
 						<span className='custom-sep-input-container'>
-							<label htmlFor="custom-pair-sep-input">Custom: </label>
+							<label htmlFor="custom-pair-sep-input">Pair separator: </label>
 							<Input value={pairCustomSep} onChange={(e) => setPairCustomSep(e.target.value)} id='custom-pair-sep-input' />
 						</span>}
 				</div>
@@ -89,7 +89,7 @@ export default function ({ isOpen, onClose }) {
 						<span>Load file</span>
 					</label>
 					<Button color={btnColors.GREEN} onClick={handleImport} >Import</Button>
-					<Button color={btnColors.RED} onClick={onClose}>Close</Button>
+					<Button color={btnColors.RED} onClick={onClose}>Exit</Button>
 				</div>
 			</div>
 		</Modal>

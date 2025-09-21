@@ -46,7 +46,7 @@ export default function ({ id, setModalOpenState }) {
 	return (
 		<>
 			<div className="content-wrapper">
-				<PageTitle>{id < 0 ? 'New' : 'Editing'} module</PageTitle>
+				<PageTitle>{id < 0 ? 'New module' : 'Module editing'} </PageTitle>
 
 				<div>
 					<label htmlFor="title"><b>Module title</b></label>

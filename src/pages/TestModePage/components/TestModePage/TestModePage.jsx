@@ -20,7 +20,7 @@ export default function () {
 	if (dict.length <= 0) return <PageTitle className='content-wrapper'>Empty module</PageTitle>
 	return (
 		<>
-			<PageTitle className='content-wrapper'>TEST</PageTitle>
+			<PageTitle className='content-wrapper'>Test</PageTitle>
 			<ProgressBar progress={progressValue / dict.length * 100} />
 			<TestWindow dict={dict} currentDictIndex={currentDictIndex} proceed={handleProceed} />
 			<ProgressModal isOpen={progressModalState} fails={dict.length - correctAnswersAmount} succeses={correctAnswersAmount} onRestart={handleRestart} />

@@ -3,7 +3,7 @@ export const TERM_DEFAULT_SEP = ' '
 
 export const TERM_SEPARATORS = Object.freeze([ // if you change this array restart your app
 	{
-		component: <span>space</span>,
+		component: <span>whitespace</span>,
 		sep: ' '
 	},
 	{
@@ -15,7 +15,7 @@ export const TERM_SEPARATORS = Object.freeze([ // if you change this array resta
 		sep: ':'
 	},
 	{
-		component: <span>custom</span>,
+		component: <span>another</span>,
 		sep: ''
 	}
 ].map((item, index) => ({ ...item, value: String(index) })))
@@ -33,7 +33,7 @@ export const PAIR_SEPARATORS = Object.freeze([ // if you change this array resta
 		sep: ';'
 	},
 	{
-		component: <span>custom</span>,
+		component: <span>another</span>,
 		sep: ''
 	}
 ].map((item, index) => ({ ...item, value: String(index) })))

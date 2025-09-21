@@ -12,9 +12,9 @@ export default function Translation({ id, left = '', right = '', onRemove, onEdi
 		<div className='translation-block content-wrapper'>
 			<IconBtn onClick={() => onRemove(id)} ><TrashIcon className='red-icon' /></IconBtn>
 			<div className="pair">
-				<h4 className='pair-word'>{left}</h4>
+				<h4 className='pair-word' translate='no'>{left}</h4>
 				<h3>:</h3>
-				<h4 className='pair-word'>{right}</h4>
+				<h4 className='pair-word' translate='no'>{right}</h4>
 			</div>
 			<IconBtn onClick={() => setModalOpenState(true)} ><PenSquareIcon className='secondary-icon' /></IconBtn>
 			{modalOpenState && ( // из-за того, что тут стоит проверка, реакт пересоздаёт модалку при удачной проверке, блягодаря чем left и right обновляются. иначе пришлось бы использовать стейты для left и right вместе с useEffect

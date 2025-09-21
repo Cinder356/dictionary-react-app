@@ -23,7 +23,7 @@ export default function ({ dict, currentDictIndex, proceed }) {
 		setCurrentTestMode(randomIndex)
 	}, [currentDictIndex])
 
-	const handleEnter = useCallback(() => { // there is useCallback which is necessry because of useKeyHandler
+	const handleEnter = useCallback(() => { // the useCallback is necessry because of useKeyHandler!!
 		if (modeEnterHandlerRef.current) {
 			modeEnterHandlerRef.current()
 			return

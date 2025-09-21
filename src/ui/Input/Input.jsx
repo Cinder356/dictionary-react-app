@@ -5,6 +5,6 @@ export default ({ className = '', disabled = false, isWrong = false, isCorrect =
 	if (isWrong) classes += ' error'
 	else if (isCorrect) classes += ' success'
 	return (
-		<input className={classes} disabled={disabled} {...props} type="text" />
+		<input translate='no' className={classes} disabled={disabled} {...props} type="text" />
 	)
 }

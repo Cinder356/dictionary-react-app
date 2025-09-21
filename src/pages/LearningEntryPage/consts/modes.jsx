@@ -4,7 +4,7 @@ import TestIcon from '@/app/icons/test.svg?react'
 
 export default [
 	{
-		component: <span className='modes-radio-element'><CardIcon className='radio-icon pink-icon' /> Cards</span>,
+		component: <span className='modes-radio-element'><CardIcon className='radio-icon pink-icon' /> Flashcards</span>,
 		value: 0,
 		getPath: paths.getCards,
 		requiredParams: ['isReverse']

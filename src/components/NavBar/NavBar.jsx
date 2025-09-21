@@ -24,7 +24,7 @@ export default function NavBar() {
 		<>
 			<nav className='line-nav'>
 				<Button onClick={() => navigate(paths.getLearn(-1))} color={getNavBtnColor(paths.getLearn(-1))}>Learn</Button>
-				<Button onClick={() => navigate(paths.getView())} color={getNavBtnColor(paths.getView())}>View</Button>
+				<Button onClick={() => navigate(paths.getView())} color={getNavBtnColor(paths.getView())}>Modules</Button>
 			</nav>
 
 			<div className="burger-tap-zone" onClick={() => setBurgerOpenState(!burgerOpenState)}>

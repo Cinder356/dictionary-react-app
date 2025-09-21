@@ -6,10 +6,10 @@ export default function Button({ children, className = '', color = btnColors.ACT
 
 	return (
 		<button
+			{...props}
 			disabled={disabled}
 			className={additionalClasses + ' ' + className}
 			type='button'
-			{...props}
 		>
 			{children}
 		</button >

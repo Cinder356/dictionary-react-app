@@ -60,8 +60,8 @@ export default function ({ term, translation, onSwipe }) {
 			onAnimationEnd={handleAnimationEnd}
 			onTransitionEnd={handleAnimationEnd}
 		>
-			<div className="flashcard-front">{term}</div>
-			<div className="flashcard-back">{translation}</div>
+			<div className="flashcard-front" translate='no'>{term}</div>
+			<div className="flashcard-back" translate='no'>{translation}</div>
 		</div>
 	)
 }

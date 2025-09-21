@@ -19,7 +19,6 @@ export default function (flashcardRef, isAnimatingRef, setIsFlipped, handleSwipe
 	};
 
 	const handlePointerMove = (e) => {
-		console.log('move')
 		if (!isDraggingRef.current) return
 
 		const currentX = e.clientX

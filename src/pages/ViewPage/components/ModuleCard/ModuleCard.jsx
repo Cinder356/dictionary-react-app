@@ -7,7 +7,7 @@ export default function ({ children, id, title, onEdit, onLearn, ...props }) {
 	return (
 		<div className="content-wrapper module-content-wrapper">
 			<div className="module-content">
-				<h3 className='module-card-caption'>{title}</h3>
+				<h3 translate='no' className='module-card-caption'>{title}</h3>
 				<div className="module-card-button-container">
 					<IconBtn onClick={() => onEdit(id)}><PenSquareIcon className='secondary-icon' /></IconBtn>
 					<IconBtn onClick={() => onLearn(id)}><TestIcon className='secondary-icon' /></IconBtn>

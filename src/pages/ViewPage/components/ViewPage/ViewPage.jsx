@@ -6,7 +6,7 @@ export default function () {
 	return (
 		<>
 			<div className="content-wrapper">
-				<PageTitle>View</PageTitle>
+				<PageTitle>Modules</PageTitle>
 			</div>
 			<CardList />
 		</>

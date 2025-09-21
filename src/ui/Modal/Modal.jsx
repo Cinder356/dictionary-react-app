@@ -7,10 +7,12 @@ export default function Modal({ children, isOpen, onSubmit = null, ...props }) {
 
 	useEffect(() => {
 		if (!dialogRef.current) return
-		if (isOpen)
+		if (isOpen) {
 			dialogRef.current.showModal()
+		}
 		else
 			dialogRef.current.close()
+
 	}, [isOpen])
 
 	if (!isOpen) return null

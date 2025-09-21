@@ -1,4 +1,4 @@
-import NavBar from '/src/components/NavBar/NavBar'
+import NavBar from '@/components/NavBar/NavBar'
 import './Header.scss'
 import logo from '/icons/logo.svg'
 

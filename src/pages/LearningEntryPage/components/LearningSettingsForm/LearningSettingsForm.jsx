@@ -54,6 +54,7 @@ export default function ({ moduleId }) {
 					<label htmlFor="module-select"><b>Module:</b></label>
 					<Select
 						id='module-select'
+						translate='no'
 						elementsArr={selectElementsArr}
 						defaultKey={moduleId}
 						onChange={(val) => setCurrentModuleId(val)} />
