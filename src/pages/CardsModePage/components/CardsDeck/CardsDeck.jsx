@@ -5,62 +5,69 @@ import Card from '../Card/Card';
 import ProgressModal from '@/components/ProgressModal/ProgressModal';
 import './CardsDeck.scss'
 import useUrlMixedDict from "@/app/hooks/useUrlMixedDict";
+import { addRecentlyUsedModule, incrementSessionsCompleted } from '@/app/helpers/statsController';
 
 const defaultProgressStats = { failedCount: 0, learnedCount: 0 }
 
 export default function ({ id }) {
-	const [dictionary, setDictionary] = useUrlMixedDict(id)
-	const [currentPairIndex, setCurrentPairIndex] = useState(0)
-	const [progressStats, setProgressStats] = useState(defaultProgressStats)
+  const [dictionary, setDictionary] = useUrlMixedDict(id)
+  const [currentPairIndex, setCurrentPairIndex] = useState(0)
+  const [progressStats, setProgressStats] = useState(defaultProgressStats)
 
-	const handleSwipe = (direction) => {
-		if (direction === 'left')
-			setProgressStats(prev => ({ failedCount: prev.failedCount + 1, learnedCount: prev.learnedCount }))
-		else if (direction === 'right')
-			setProgressStats(prev => ({ failedCount: prev.failedCount, learnedCount: prev.learnedCount + 1 }))
-		setCurrentPairIndex(prev => prev + 1)
-	}
+  const handleSwipe = (direction) => {
+    if (direction === 'left')
+      setProgressStats(prev => ({ failedCount: prev.failedCount + 1, learnedCount: prev.learnedCount }))
+    else if (direction === 'right')
+      setProgressStats(prev => ({ failedCount: prev.failedCount, learnedCount: prev.learnedCount + 1 }))
+    setCurrentPairIndex(prev => {
+      if (prev + 1 === dictionary.length && dictionary.length > 0) {
+        addRecentlyUsedModule(id)
+        incrementSessionsCompleted()
+      }
+      return prev + 1
+    })
+  }
 
-	const handleRestart = () => {
-		setProgressStats(defaultProgressStats)
-		setDictionary(prev => shuffleArray(prev))
-		setCurrentPairIndex(0)
-	}
+  const handleRestart = () => {
+    setProgressStats(defaultProgressStats)
+    setDictionary(prev => shuffleArray(prev))
+    setCurrentPairIndex(0)
+  }
 
-	if (dictionary.length === 0)
-		return <div className='content-wrapper'><PageTitle>Empty module</PageTitle></div>
+  if (dictionary.length === 0)
+    return <div className='content-wrapper'><PageTitle>Empty module</PageTitle></div>
 
-	return (
-		<div className='deck-container'>
-			{currentPairIndex < dictionary.length && <Card
-				term={dictionary[currentPairIndex].left}
-				translation={dictionary[currentPairIndex].right}
-				onSwipe={handleSwipe}
-			/>}
-			{currentPairIndex + 1 < dictionary.length && <div translate='no' className='card-template second-card'>{dictionary[currentPairIndex + 1].left}</div>}
-			{currentPairIndex + 2 < dictionary.length && <div translate='no' className='card-template third-card' />}
-			<ProgressModal
-				isOpen={currentPairIndex === dictionary.length && dictionary.length > 0}
-				fails={progressStats.failedCount}
-				succeses={progressStats.learnedCount}
-				onRestart={handleRestart}
-			/>
+  return (
+    <div className='deck-container'>
+      {currentPairIndex < dictionary.length && <Card
+        term={dictionary[currentPairIndex].left}
+        translation={dictionary[currentPairIndex].right}
+        onSwipe={handleSwipe}
+      />}
+      {currentPairIndex + 1 < dictionary.length && <div translate='no' className='card-template second-card'>{dictionary[currentPairIndex + 1].left}</div>}
+      {currentPairIndex + 2 < dictionary.length && <div translate='no' className='card-template third-card' />}
+      <ProgressModal
+        isOpen={currentPairIndex === dictionary.length && dictionary.length > 0}
+        fails={progressStats.failedCount}
+        succeses={progressStats.learnedCount}
+        onRestart={handleRestart}
+      />
 
-			<div className='swipe-hints-container'>
-				<svg className='left-arrow' width="48" height="48" viewBox="0 0 48 48" fill="none">
-					<path d="M36 24C28 20 20 20 12 24" strokeWidth="3"
-						strokeLinecap="round" strokeLinejoin="round" />
-					<path d="M18 18L12 24L18 30" strokeWidth="3"
-						strokeLinecap="round" strokeLinejoin="round" />
-				</svg>
+      <div className='swipe-hints-container'>
+        <svg className='left-arrow' width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M36 24C28 20 20 20 12 24" strokeWidth="3"
+            strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M18 18L12 24L18 30" strokeWidth="3"
+            strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
 
-				<svg className='right-arrow' width="48" height="48" viewBox="0 0 48 48" fill="none">
-					<path d="M12 24C20 20 28 20 36 24" strokeWidth="3"
-						strokeLinecap="round" strokeLinejoin="round" />
-					<path d="M30 18L36 24L30 30" strokeWidth="3"
-						strokeLinecap="round" strokeLinejoin="round" />
-				</svg>
-			</div>
-		</div>
-	)
+        <svg className='right-arrow' width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <path d="M12 24C20 20 28 20 36 24" strokeWidth="3"
+            strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M30 18L36 24L30 30" strokeWidth="3"
+            strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+    </div>
+  )
 }

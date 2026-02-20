@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './ModuleStats.scss'
 import { getAllModulesMeta } from '@/app/helpers/moduleController'
 import { getModuleDictinary } from '@/app/helpers/moduleController'
+import { getStats } from '@/app/helpers/statsController'
 
 export default function ModuleStats() {
   const [stats, setStats] = useState({
@@ -13,12 +14,13 @@ export default function ModuleStats() {
   useEffect(() => {
     async function fetchStats() {
       try {
+        const userStats = await getStats()
         const modulesMeta = await getAllModulesMeta()
         const totalModules = modulesMeta?.length || 0
 
         // Count total word pairs across all modules
         let totalWordPairs = 0
-        let completedModules = 0
+        let completedModules = userStats.totalSessionsCompleted || 0
 
         for (const module of modulesMeta || []) {
           try {
@@ -26,11 +28,6 @@ export default function ModuleStats() {
             const pairCount = dictionary?.length || 0
             totalWordPairs += pairCount
 
-            // TODO: Replace with actual completion tracking when implemented
-            // For now, consider a module "completed" if it has 20+ word pairs
-            if (pairCount >= 20) {
-              completedModules++
-            }
           } catch (err) {
             console.error(`Error fetching dictionary for module ${module.id}:`, err)
           }
