@@ -1,0 +1,86 @@
+@use '/src/app/styles/variables';
+
+.quick-actions-section {
+	padding: 1.5rem 0;
+
+	.section-title {
+		font-size: 1.4rem;
+		font-weight: 600;
+		color: var(--accent-color);
+		margin-bottom: 1.2rem;
+		text-align: center;
+	}
+
+	.actions-container {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+
+		@media (max-width: variables.$mobile-size-limit) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.action-card {
+		background-color: color-mix(in srgb, var(--primary-color), black 10%);
+		border-radius: 1rem;
+		padding: 1.5rem 1rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.8rem;
+		cursor: pointer;
+		transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+		&:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+			background-color: color-mix(in srgb, var(--primary-color), black 15%);
+		}
+
+		&:focus-visible {
+			outline: 2px solid var(--secondary-color);
+			outline-offset: 2px;
+		}
+
+		.action-icon-container {
+			width: 3.5rem;
+			height: 3.5rem;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			&.create {
+				background: linear-gradient(135deg, var(--secondary-color), color-mix(in srgb, var(--secondary-color), white 20%));
+			}
+
+			&.view {
+				background: linear-gradient(135deg, var(--pink-color), color-mix(in srgb, var(--pink-color), white 20%));
+			}
+
+			&.learn {
+				background: linear-gradient(135deg, var(--green-color), color-mix(in srgb, var(--green-color), white 20%));
+			}
+
+			.action-icon {
+				width: 1.8rem;
+				height: 1.8rem;
+
+				path {
+					stroke: var(--background-color);
+					stroke-width: 2.5;
+				}
+			}
+		}
+
+		.action-label {
+			font-size: 1rem;
+			font-weight: 600;
+			color: var(--accent-color);
+			text-align: center;
+			margin: 0;
+		}
+	}
+}

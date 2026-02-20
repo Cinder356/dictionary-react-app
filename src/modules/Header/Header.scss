@@ -1,25 +1,43 @@
 @use '/src/app/styles/variables';
 
 header {
-	display: flex;
-	width: 100%;
-	height: 3.3rem;
-	background-color: var(--primary-color);
-	justify-content: center;
+  display: flex;
+  width: 100%;
+  height: 3.3rem;
+  background-color: var(--primary-color);
+  justify-content: center;
 }
 
 .header-content-container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	max-width: #{variables.$max-content-width + 250};
-	width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: #{variables.$max-content-width + 250};
+  width: 90%;
+}
+
+.brand-name {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+
+  * {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 #logo-container {
-	display: flex;
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  img {
+    height: 80%;
+    width: auto;
+    margin-right: 1rem;
+  }
 }
 
-#logo-container img {
-	margin-right: 1rem
-}

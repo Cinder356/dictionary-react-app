@@ -1,0 +1,60 @@
+@use '/src/app/styles/variables';
+
+.recently-used-section {
+	padding: 1.5rem 0;
+
+	.section-title {
+		font-size: 1.4rem;
+		font-weight: 600;
+		color: var(--accent-color);
+		margin-bottom: 1.2rem;
+		text-align: center;
+	}
+
+	.modules-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.7rem;
+	}
+
+	.module-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background-color: color-mix(in srgb, var(--primary-color), black 8%);
+		padding: 0.9rem 1.2rem;
+		border-radius: 0.7rem;
+		transition: background-color 0.2s ease;
+
+		&:hover {
+			background-color: color-mix(in srgb, var(--primary-color), black 15%);
+		}
+
+		.module-title {
+			font-size: 1rem;
+			color: var(--accent-color);
+			font-weight: 500;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			max-width: 70%;
+
+			@media (max-width: 400px) {
+				max-width: 60%;
+			}
+		}
+
+		.module-actions {
+			display: flex;
+			gap: 0.5rem;
+		}
+	}
+
+	.placeholder-note {
+		text-align: center;
+		font-size: 0.85rem;
+		color: color-mix(in srgb, var(--accent-color), transparent 50%);
+		margin-top: 1rem;
+		font-style: italic;
+	}
+}

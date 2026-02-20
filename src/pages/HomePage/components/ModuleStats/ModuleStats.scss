@@ -1,0 +1,72 @@
+@use '/src/app/styles/variables';
+
+.module-stats-section {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 1.2rem;
+    text-align: center;
+  }
+
+  .stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+
+    @media (max-width: variables.$mobile-size-limit) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .stat-card {
+    background: linear-gradient(135deg,
+        color-mix(in srgb, var(--primary-color), black 5%),
+        color-mix(in srgb, var(--primary-color), black 12%));
+    border-radius: 1rem;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1;
+
+      &.modules {
+        color: var(--secondary-color);
+        text-shadow: 0 0 20px color-mix(in srgb, var(--secondary-color), transparent 50%);
+      }
+
+      &.pairs {
+        color: var(--pink-color);
+        text-shadow: 0 0 20px color-mix(in srgb, var(--pink-color), transparent 50%);
+      }
+
+      &.completed {
+        color: var(--green-color);
+        text-shadow: 0 0 20px color-mix(in srgb, var(--green-color), transparent 50%);
+      }
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: color-mix(in srgb, var(--accent-color), transparent 35%);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+}
