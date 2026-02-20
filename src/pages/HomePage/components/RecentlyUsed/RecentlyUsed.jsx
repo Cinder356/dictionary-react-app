@@ -18,6 +18,8 @@ export default function RecentlyUsed() {
       .then(recentModules => setModules(recentModules))
   }, [])
 
+  if (modules.length === 0) return null;
+
   return (
     <section className='recently-used-section'>
       <h2 className='section-title'>Recently Used Modules</h2>
