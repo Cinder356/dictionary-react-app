@@ -8,16 +8,16 @@ A modern, feature-rich React application for creating and managing language lear
 
 ## 📖 Table of Contents
 
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Available Scripts](#available-scripts)
-- [Application Overview](#application-overview)
-- [Usage Guide](#usage-guide)
-- [Configuration](#configuration)
-- [Browser Support](#browser-support)
-- [License](#license)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Getting Started](#-getting-started)
+- [Available Scripts](#-available-scripts)
+- [Application Overview](#-application-overview)
+- [Usage Guide](#-usage-guide)
+- [Configuration](#-configuration)
+- [Browser Support](#-browser-support)
+- [License](#-license)
 
 ---
 
