@@ -14,18 +14,19 @@ export default function ({ id }) {
   const [currentPairIndex, setCurrentPairIndex] = useState(0)
   const [progressStats, setProgressStats] = useState(defaultProgressStats)
 
-  const handleSwipe = (direction) => {
+  const handleSwipe = async (direction) => {
     if (direction === 'left')
       setProgressStats(prev => ({ failedCount: prev.failedCount + 1, learnedCount: prev.learnedCount }))
     else if (direction === 'right')
       setProgressStats(prev => ({ failedCount: prev.failedCount, learnedCount: prev.learnedCount + 1 }))
-    setCurrentPairIndex(prev => {
-      if (prev + 1 === dictionary.length && dictionary.length > 0) {
-        addRecentlyUsedModule(id)
-        incrementSessionsCompleted()
-      }
-      return prev + 1
-    })
+    
+    const isLastCard = currentPairIndex + 1 === dictionary.length && dictionary.length > 0
+    setCurrentPairIndex(prev => prev + 1)
+    
+    if (isLastCard) {
+      await addRecentlyUsedModule(id)
+      await incrementSessionsCompleted()
+    }
   }
 
   const handleRestart = () => {

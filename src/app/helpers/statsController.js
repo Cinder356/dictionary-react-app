@@ -45,8 +45,10 @@ export const initStats = async () => {
 
 export const incrementSessionsCompleted = async () => {
   const db = await getDB();
-  const current = await db.get(USER_STATS_STORE_NAME, STATS_ID);
-  if (!current) return initStats();
+  let current = await db.get(USER_STATS_STORE_NAME, STATS_ID);
+  if (!current) {
+    current = await initStats();
+  }
 
   const updated = {
     totalSessionsCompleted: current.totalSessionsCompleted + 1,
@@ -63,8 +65,10 @@ export const addRecentlyUsedModule = async (moduleId) => {
     throw new Error(`Module with ID ${moduleId} does not exist`);
   }
 
-  const current = await db.get(USER_STATS_STORE_NAME, STATS_ID);
-  if (!current) return initStats();
+  let current = await db.get(USER_STATS_STORE_NAME, STATS_ID);
+  if (!current) {
+    current = await initStats();
+  }
 
   const recent = current.recentlyUsedModuleIds || [];
   const filtered = recent.filter(id => id !== moduleId);

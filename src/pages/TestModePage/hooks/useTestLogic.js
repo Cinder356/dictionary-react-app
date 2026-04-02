@@ -12,18 +12,19 @@ export default function () {
   const [progressModalState, setProgressModalState] = useState(false)
   const [correctAnswersAmount, setCorrectAnswersAmount] = useState(0)
 
-  const handleProceed = (isCorrect) => {
+  const handleProceed = async (isCorrect) => {
     if (isCorrect) setCorrectAnswersAmount(prev => prev + 1)
     setProgressValue(prev => prev + 1)
-    setCurrentDictIndex(prev => {
-      if (prev + 1 === dict.length) {
-        setProgressModalState(true)
-        addRecentlyUsedModule(id)
-        incrementSessionsCompleted()
-        return prev
-      }
-      return prev + 1
-    })
+    
+    const isLastQuestion = currentDictIndex + 1 === dict.length
+    
+    if (isLastQuestion) {
+      setProgressModalState(true)
+      await addRecentlyUsedModule(id)
+      await incrementSessionsCompleted()
+    } else {
+      setCurrentDictIndex(prev => prev + 1)
+    }
   }
 
   const handleRestart = () => {
