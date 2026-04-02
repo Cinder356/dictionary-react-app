@@ -20,11 +20,25 @@ export default function ({ dict, currentDictIndex, onAnswer }) {
 		let additionalDefsAmount = MAX_ADDITIONAL_DEFS_AMOUNT
 		if (dict.length - 1 <= additionalDefsAmount)
 			additionalDefsAmount = dict.length - 1
-		while (tempDefinitions.length != additionalDefsAmount) {
-			const currentDefinition = dict[Math.floor(Math.random() * dict.length)].right
-			if (currentDefinition == correctDefinition || tempDefinitions.includes(currentDefinition))
-				continue
-			tempDefinitions.push(currentDefinition)
+
+		// Collect unique definitions excluding the correct one
+		const uniqueDefs = []
+		for (let i = 0; i < dict.length; i++) {
+			const def = dict[i].right
+			if (def !== correctDefinition && !uniqueDefs.includes(def)) {
+				uniqueDefs.push(def)
+			}
+		}
+
+		// Safely select random definitions with max attempts
+		let attempts = 0
+		const maxAttempts = Math.min(additionalDefsAmount * 10, 100)
+		while (tempDefinitions.length < additionalDefsAmount && attempts < maxAttempts && uniqueDefs.length >= additionalDefsAmount) {
+			const currentDefinition = uniqueDefs[Math.floor(Math.random() * uniqueDefs.length)]
+			if (!tempDefinitions.includes(currentDefinition)) {
+				tempDefinitions.push(currentDefinition)
+			}
+			attempts++
 		}
 		const correctIndex = Math.floor(Math.random() * tempDefinitions.length)
 		tempDefinitions.splice(correctIndex, 0, correctDefinition)
